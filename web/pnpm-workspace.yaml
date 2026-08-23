@@ -1,0 +1,5 @@
+allowBuilds:
+  sharp: true
+  unrs-resolver: false
+  # better-sqlite3 include già i prebuild per tutte le piattaforme: niente node-gyp
+  better-sqlite3: false

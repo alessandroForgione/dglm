@@ -1,0 +1,143 @@
+@import "tailwindcss";
+
+@theme {
+  --color-asfalto: #0b0b0b;
+  --color-cemento: #161616;
+  --color-grafite: #222222;
+  --color-calce: #f2f0ea;
+  --color-fumo: #7c7b74;
+  --color-acido: #c8ff00;
+  --color-ruggine: #ff4a1c;
+  --color-line: rgba(242, 240, 234, 0.14);
+
+  --font-display: var(--font-display), "Impact", "Arial Narrow", sans-serif;
+  --font-sans: var(--font-sans), "Helvetica Neue", Arial, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, "SF Mono", Menlo, monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-snap: cubic-bezier(0.7, 0, 0.2, 1);
+
+  --animate-marquee: marquee 28s linear infinite;
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --nav-h: 64px;
+  }
+  html {
+    background: var(--color-asfalto);
+    color: var(--color-calce);
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.55;
+    font-feature-settings: "ss01", "cv01";
+    background: var(--color-asfalto);
+    color: var(--color-calce);
+    overflow-x: clip;
+  }
+  ::selection {
+    background: var(--color-acido);
+    color: var(--color-asfalto);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-acido);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-variation-settings: "opsz" 72;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.86;
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-fumo);
+}
+
+/* Wordmark serigrafico fuori registro: due layer, il lime sfalsato. */
+@property --mis-x { syntax: "<length>"; inherits: true; initial-value: 0px; }
+@property --mis-y { syntax: "<length>"; inherits: true; initial-value: 0px; }
+
+@utility misprint {
+  position: relative;
+  display: inline-block;
+  color: var(--color-calce);
+  &::before {
+    content: attr(data-text);
+    position: absolute;
+    inset: 0;
+    color: var(--color-acido);
+    mix-blend-mode: screen;
+    transform: translate(var(--mis-x), var(--mis-y));
+    pointer-events: none;
+    z-index: -1;
+  }
+}
+
+/* Hero: il layer lime parte molto fuori registro ed entra in registro; resta un filo sfalsato. */
+@keyframes register {
+  from { --mis-x: 0.45em; --mis-y: -0.3em; opacity: 0; }
+  40% { opacity: 1; }
+  to { --mis-x: 0.035em; --mis-y: -0.03em; opacity: 1; }
+}
+.hero-mark {
+  --mis-x: 0.035em;
+  --mis-y: -0.03em;
+  animation: register 1.6s var(--ease-out-expo) both;
+  transition: --mis-x 0.5s var(--ease-snap), --mis-y 0.5s var(--ease-snap);
+}
+.hero-mark:hover {
+  --mis-x: 0.08em;
+  --mis-y: -0.07em;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-mark { animation: none; }
+}
+
+@utility hairline {
+  border-color: var(--color-line);
+}
+
+.noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 60;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  background-size: 240px 240px;
+}
+
+/* Card prodotto: la foto "scatta" e il bordo diventa lime */
+.card-media {
+  transition: transform 0.6s var(--ease-out-expo);
+}
+.group:hover .card-media {
+  transform: scale(1.035);
+}

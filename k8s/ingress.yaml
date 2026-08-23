@@ -1,0 +1,45 @@
+# Redirect www → apex (Traefik middleware)
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: dglm-redirect-www
+  namespace: dglm
+spec:
+  redirectRegex:
+    regex: "^https?://www\\.dglm\\.it/(.*)"
+    replacement: "https://dglm.it/${1}"
+    permanent: true
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dglm-web
+  namespace: dglm
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.middlewares: dglm-dglm-redirect-www@kubernetescrd
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: dglm.it
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: dglm-web
+                port: { number: 3000 }
+    - host: www.dglm.it
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: dglm-web
+                port: { number: 3000 }
+  tls:
+    - hosts: [dglm.it, www.dglm.it]
+      secretName: dglm-it-tls

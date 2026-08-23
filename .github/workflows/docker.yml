@@ -1,0 +1,51 @@
+name: Build & push image
+
+on:
+  push:
+    branches: [main]
+    paths: ["web/**", ".github/workflows/docker.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE: ghcr.io/${{ github.repository_owner }}/dglm-web
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: docker/setup-buildx-action@v3
+
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ${{ env.IMAGE }}
+          # ghcr vuole il nome tutto minuscolo
+          flavor: latest=true
+          tags: |
+            type=sha,prefix=sha-,format=short
+            type=raw,value={{date 'YYYYMMDD-HHmm'}}
+
+      - uses: docker/build-push-action@v6
+        with:
+          context: web
+          platforms: linux/amd64
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Image tags
+        run: echo "${{ steps.meta.outputs.tags }}"
