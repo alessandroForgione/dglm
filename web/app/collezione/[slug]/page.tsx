@@ -31,9 +31,9 @@ export default async function ProductPage({ params }: PageProps<"/collezione/[sl
   return (
     <article className="mx-auto max-w-[1600px] px-5 md:px-8 pt-[calc(var(--nav-h)+24px)] pb-16">
       <nav className="eyebrow mb-6 flex items-center gap-2" aria-label="Percorso">
-        <Link href="/collezione" className="hover:text-acido">Collezione</Link>
+        <Link href="/collezione" className="hover:underline underline-offset-4">Collezione</Link>
         <span>/</span>
-        <span className="text-calce/70">{p.tag}</span>
+        <span className="text-inchiostro/70">{p.tag}</span>
       </nav>
 
       <div className="grid gap-8 lg:grid-cols-12">
@@ -43,7 +43,7 @@ export default async function ProductPage({ params }: PageProps<"/collezione/[sl
             {p.images.map((img, i) => (
               <div
                 key={img.src}
-                className="relative shrink-0 snap-start w-[82vw] sm:w-[60vw] lg:w-full aspect-[4/5] border border-line bg-cemento"
+                className="relative shrink-0 snap-start w-[82vw] sm:w-[60vw] lg:w-full aspect-[4/5] border border-line bg-gesso"
               >
                 <Image src={img.src} alt={img.alt} fill priority={i === 0} sizes="(min-width:1024px) 55vw, 82vw" className="object-cover" />
               </div>
@@ -56,12 +56,12 @@ export default async function ProductPage({ params }: PageProps<"/collezione/[sl
           <h1 className="display text-[clamp(3rem,7vw,6.5rem)]">{p.name}</h1>
           <div className="mt-4 flex items-baseline gap-4">
             <p className="font-mono text-[28px] tabular-nums">{formatPrice(p.price)}</p>
-            <p className={p.status === "soldout" ? "eyebrow text-ruggine" : "eyebrow text-acido"}>
+            <p className={p.status === "soldout" ? "eyebrow text-grigio line-through" : "eyebrow text-inchiostro"}>
               {p.status === "preorder" ? "Pre-order" : p.status === "soldout" ? "Sold out" : "Disponibile"}
             </p>
           </div>
 
-          <p className="mt-8 text-[17px] leading-relaxed text-calce/85">{p.description}</p>
+          <p className="mt-8 text-[17px] leading-relaxed text-inchiostro/85">{p.description}</p>
 
           <div className="mt-8">
             <p className="eyebrow mb-3">Taglie</p>
@@ -93,7 +93,7 @@ export default async function ProductPage({ params }: PageProps<"/collezione/[sl
             )}
             <ButtonLink href="/collezione" variant="ghost">Torna alla collezione</ButtonLink>
           </div>
-          <p className="mt-4 text-[13px] text-fumo">
+          <p className="mt-4 text-[13px] text-grigio">
             Il pre-order è una lista d&apos;attesa: nessun pagamento ora. Ti contattiamo noi all&apos;apertura del drop.
           </p>
         </div>

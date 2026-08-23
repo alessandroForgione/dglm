@@ -7,9 +7,9 @@ type Variant = "acid" | "ghost" | "ink";
 const base =
   "inline-flex items-center justify-center gap-2 font-mono text-[12px] uppercase tracking-[0.18em] px-5 h-12 border transition-colors duration-200 select-none whitespace-nowrap";
 const variants: Record<Variant, string> = {
-  acid: "bg-acido text-asfalto border-acido hover:bg-calce hover:border-calce",
-  ghost: "bg-transparent text-calce border-calce/40 hover:border-acido hover:text-acido",
-  ink: "bg-calce text-asfalto border-calce hover:bg-acido hover:border-acido",
+  acid: "bg-inchiostro text-carta border-inchiostro hover:bg-carta hover:text-inchiostro",
+  ghost: "bg-transparent text-inchiostro border-inchiostro/40 hover:border-inchiostro",
+  ink: "bg-carta text-inchiostro border-inchiostro hover:bg-inchiostro hover:text-carta",
 };
 
 type LinkProps = ComponentProps<typeof Link> & { variant?: Variant };

@@ -6,7 +6,7 @@ export function Marquee({ items, className, tone = "acid" }: { items: readonly s
     <div
       className={clsx(
         "overflow-hidden whitespace-nowrap select-none",
-        tone === "acid" ? "bg-acido text-asfalto" : "border-y border-line text-calce",
+        tone === "acid" ? "bg-inchiostro text-carta" : "border-y border-line text-inchiostro",
         className,
       )}
       aria-hidden

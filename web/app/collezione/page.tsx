@@ -16,7 +16,7 @@ export default function CollezionePage() {
           <p className="eyebrow mb-3">{site.drop.name} · {site.drop.label}</p>
           <h1 className="display text-[clamp(3.5rem,12vw,12rem)]">Collezione</h1>
         </div>
-        <p className="md:col-span-4 text-calce/75 max-w-sm md:justify-self-end">
+        <p className="md:col-span-4 text-inchiostro/75 max-w-sm md:justify-self-end">
           {products.length} capi, tirature chiuse. Tutti i pezzi sono in pre-order fino al drop: chi è in lista accede per primo.
         </p>
       </div>

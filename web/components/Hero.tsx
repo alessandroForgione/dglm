@@ -48,7 +48,7 @@ export function Hero({ count }: { count: number }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.9, duration: 0.8, ease }}
       >
-        <p className="md:col-span-5 text-[22px] md:text-[28px] leading-[1.15] font-medium text-calce max-w-md">
+        <p className="md:col-span-5 text-[22px] md:text-[28px] leading-[1.15] font-medium text-inchiostro max-w-md">
           {site.tagline} Drop limitati, tagli netti, cotone pesante. Il primo drop apre in pre-order.
         </p>
         <div className="md:col-span-4 md:col-start-7 flex flex-wrap items-center gap-3">
@@ -60,7 +60,7 @@ export function Hero({ count }: { count: number }) {
           </ButtonLink>
         </div>
         <div className="md:col-span-2 md:text-right">
-          <p className="font-mono text-[40px] leading-none text-acido tabular-nums">{String(count).padStart(4, "0")}</p>
+          <p className="font-mono text-[40px] leading-none text-inchiostro tabular-nums">{String(count).padStart(4, "0")}</p>
           <p className="eyebrow mt-1">già in lista</p>
         </div>
       </motion.div>

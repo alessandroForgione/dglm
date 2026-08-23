@@ -14,9 +14,9 @@ type State =
   | { kind: "done"; status: "created" | "duplicate"; number: number | null };
 
 const inputCls =
-  "peer w-full bg-transparent border-b border-line py-3 text-[18px] text-calce placeholder-transparent focus:border-acido focus:outline-none transition-colors aria-[invalid=true]:border-ruggine";
+  "peer w-full bg-transparent border-b border-line py-3 text-[18px] text-inchiostro placeholder-transparent focus:border-inchiostro focus:outline-none transition-colors aria-[invalid=true]:border-inchiostro";
 const labelCls =
-  "pointer-events-none absolute left-0 top-3 font-mono text-[11px] uppercase tracking-[0.18em] text-fumo transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-[14px] peer-placeholder-shown:tracking-normal peer-placeholder-shown:normal-case peer-focus:-top-3 peer-focus:text-[11px] peer-focus:uppercase peer-focus:tracking-[0.18em] peer-focus:text-acido -top-3";
+  "pointer-events-none absolute left-0 top-3 font-mono text-[11px] uppercase tracking-[0.18em] text-grigio transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-[14px] peer-placeholder-shown:tracking-normal peer-placeholder-shown:normal-case peer-focus:-top-3 peer-focus:text-[11px] peer-focus:uppercase peer-focus:tracking-[0.18em] peer-focus:text-inchiostro -top-3";
 
 function FieldBox({
   id, label, error, children,
@@ -26,7 +26,7 @@ function FieldBox({
       {children}
       <label htmlFor={id} className={labelCls}>{label}</label>
       {error && (
-        <p id={`${id}-error`} className="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-ruggine">
+        <p id={`${id}-error`} className="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-inchiostro">
           {error}
         </p>
       )}
@@ -76,21 +76,21 @@ export function PreorderForm({ nextNumber }: { nextNumber: number }) {
           initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="border border-acido p-6 md:p-10"
+          className="border border-inchiostro p-6 md:p-10"
           role="status"
           aria-live="polite"
         >
-          <p className="eyebrow text-acido">{state.status === "duplicate" ? "Eri già in lista" : "Pre-order registrato"}</p>
+          <p className="eyebrow text-inchiostro">{state.status === "duplicate" ? "Eri già in lista" : "Pre-order registrato"}</p>
           <p className="display mt-3 text-[clamp(3rem,12vw,9rem)]">Sei dentro.</p>
           {state.number != null && (
             <div className="mt-6 flex items-baseline gap-4">
               <span className="eyebrow">Il tuo numero</span>
-              <span className="font-mono text-[56px] md:text-[80px] leading-none text-acido tabular-nums">
+              <span className="font-mono text-[56px] md:text-[80px] leading-none text-inchiostro tabular-nums">
                 N°{String(state.number).padStart(4, "0")}
               </span>
             </div>
           )}
-          <p className="mt-6 max-w-md text-calce/80">
+          <p className="mt-6 max-w-md text-inchiostro/80">
             Ti abbiamo mandato una conferma via email. Quando {site.drop.name} apre, i numeri più bassi entrano per primi.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -108,7 +108,7 @@ export function PreorderForm({ nextNumber }: { nextNumber: number }) {
         >
           <div className="flex items-baseline justify-between gap-4 border-b border-line pb-4 mb-2">
             <p className="eyebrow">{site.drop.name} · Lista d&apos;attesa</p>
-            <p className="font-mono text-[13px] text-acido tabular-nums">N°{String(nextNumber).padStart(4, "0")}</p>
+            <p className="font-mono text-[13px] text-inchiostro tabular-nums">N°{String(nextNumber).padStart(4, "0")}</p>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 mt-6">
@@ -137,17 +137,17 @@ export function PreorderForm({ nextNumber }: { nextNumber: number }) {
               type="checkbox"
               name="consent"
               required
-              className="mt-1 h-4 w-4 shrink-0 appearance-none border border-calce/40 checked:bg-acido checked:border-acido focus-visible:outline-2 focus-visible:outline-acido"
+              className="mt-1 h-4 w-4 shrink-0 appearance-none border border-inchiostro/40 checked:bg-inchiostro checked:border-inchiostro focus-visible:outline-2 focus-visible:outline-inchiostro"
               aria-invalid={!!errs.consent}
             />
-            <span className="text-[14px] text-calce/75">
+            <span className="text-[14px] text-inchiostro/75">
               Acconsento al trattamento dei dati per ricevere comunicazioni su {site.drop.name}. Niente spam, puoi uscire dalla lista quando vuoi.
             </span>
           </label>
-          {errs.consent && <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-ruggine">{errs.consent}</p>}
+          {errs.consent && <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-inchiostro">{errs.consent}</p>}
 
           {state.kind === "error" && state.message && (
-            <p role="alert" className="mt-6 border border-ruggine px-4 py-3 font-mono text-[12px] uppercase tracking-[0.12em] text-ruggine">
+            <p role="alert" className="mt-6 border border-inchiostro px-4 py-3 font-mono text-[12px] uppercase tracking-[0.12em] text-inchiostro">
               {state.message}
             </p>
           )}
@@ -156,7 +156,7 @@ export function PreorderForm({ nextNumber }: { nextNumber: number }) {
             <Button type="submit" disabled={state.kind === "loading"} className={clsx("h-14 px-7 text-[13px]", state.kind === "loading" && "animate-pulse")}>
               {state.kind === "loading" ? "Registrazione…" : "Prendi il tuo numero"} <Arrow />
             </Button>
-            <p className="text-[13px] text-fumo">Nessun pagamento ora. È una lista d&apos;attesa.</p>
+            <p className="text-[13px] text-grigio">Nessun pagamento ora. È una lista d&apos;attesa.</p>
           </div>
         </motion.form>
       )}

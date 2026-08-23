@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1500" viewBox="0 0 1200 1500">
-  <defs><pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#1f1f1f" stroke-width="1"/></pattern></defs>
-  <rect width="100%" height="100%" fill="#161616"/>
+  <defs><pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#e4e4e4" stroke-width="1"/></pattern></defs>
+  <rect width="100%" height="100%" fill="#f0f0f0"/>
   <rect width="100%" height="100%" fill="url(#g)"/>
-  <path d="M360 420 L500 360 Q600 300 700 360 L840 420 L930 640 L810 690 L810 1180 L390 1180 L390 690 L270 640 Z" fill="#2a2a2a" stroke="#3a3a3a" stroke-width="4"/>
-    <path d="M500 360 Q600 470 700 360 Q640 300 560 300 Q500 320 500 360Z" fill="#2a2a2a" stroke="#3a3a3a" stroke-width="4"/>
-    <rect x="470" y="900" width="260" height="200" fill="#2a2a2a" stroke="#3a3a3a" stroke-width="4"/>
+  <path d="M360 420 L500 360 Q600 300 700 360 L840 420 L930 640 L810 690 L810 1180 L390 1180 L390 690 L270 640 Z" fill="#ffffff" stroke="#0b0b0b" stroke-width="4"/>
+    <path d="M500 360 Q600 470 700 360 Q640 300 560 300 Q500 320 500 360Z" fill="#ffffff" stroke="#0b0b0b" stroke-width="4"/>
+    <rect x="470" y="900" width="260" height="200" fill="#ffffff" stroke="#0b0b0b" stroke-width="4"/>
   
-  <text x="60" y="1400" font-family="ui-monospace, Menlo, monospace" font-size="28" fill="#f2f0ea" opacity="0.8">GARAGE HOODIE</text>
-  <text x="60" y="1440" font-family="ui-monospace, Menlo, monospace" font-size="22" fill="#f2f0ea" opacity="0.45">BACK · PATCH</text>
-  <text x="1140" y="1440" text-anchor="end" font-family="ui-monospace, Menlo, monospace" font-size="22" fill="#c8ff00">DROP 01 · PLACEHOLDER</text>
+  <text x="60" y="1400" font-family="ui-monospace, Menlo, monospace" font-size="28" fill="#0b0b0b" opacity="0.8">GARAGE HOODIE</text>
+  <text x="60" y="1440" font-family="ui-monospace, Menlo, monospace" font-size="22" fill="#0b0b0b" opacity="0.45">BACK · PATCH</text>
+  <text x="1140" y="1440" text-anchor="end" font-family="ui-monospace, Menlo, monospace" font-size="22" fill="#0b0b0b">DROP 01 · PLACEHOLDER</text>
 </svg>

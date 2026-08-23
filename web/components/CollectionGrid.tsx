@@ -23,10 +23,10 @@ export function CollectionGrid() {
               onClick={() => setActive(t)}
               className={clsx(
                 "font-mono text-[12px] uppercase tracking-[0.16em] h-10 px-4 border transition-colors",
-                on ? "bg-calce text-asfalto border-calce" : "border-line text-calce/80 hover:border-acido hover:text-acido",
+                on ? "bg-inchiostro text-carta border-inchiostro" : "border-line text-inchiostro/70 hover:border-inchiostro hover:text-inchiostro",
               )}
             >
-              {t} <span className={clsx("ml-1", on ? "text-asfalto/60" : "text-fumo")}>{n}</span>
+              {t} <span className={clsx("ml-1", on ? "text-carta/60" : "text-grigio")}>{n}</span>
             </button>
           );
         })}
@@ -36,7 +36,7 @@ export function CollectionGrid() {
           <ProductCard key={p.slug} product={p} priority={i < 4} />
         ))}
       </div>
-      {list.length === 0 && <p className="text-fumo">Nessun capo in questa categoria, per ora.</p>}
+      {list.length === 0 && <p className="text-grigio">Nessun capo in questa categoria, per ora.</p>}
     </>
   );
 }

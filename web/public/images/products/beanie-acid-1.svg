@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1500" viewBox="0 0 1200 1500">
-  <defs><pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#1f1f1f" stroke-width="1"/></pattern></defs>
-  <rect width="100%" height="100%" fill="#161616"/>
+  <defs><pattern id="g" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M40 0H0V40" fill="none" stroke="#e4e4e4" stroke-width="1"/></pattern></defs>
+  <rect width="100%" height="100%" fill="#f0f0f0"/>
   <rect width="100%" height="100%" fill="url(#g)"/>
-  <path d="M340 900 Q340 420 600 420 Q860 420 860 900 Z" fill="#c8ff00" stroke="#3a3a3a" stroke-width="4"/>
-    <rect x="320" y="860" width="560" height="160" fill="#c8ff00" stroke="#3a3a3a" stroke-width="4"/>
-    <line x1="360" y1="870" x2="360" y2="1010" stroke="#3a3a3a" stroke-width="4"/><line x1="420" y1="870" x2="420" y2="1010" stroke="#3a3a3a" stroke-width="4"/><line x1="480" y1="870" x2="480" y2="1010" stroke="#3a3a3a" stroke-width="4"/><line x1="540" y1="870" x2="540" y2="1010" stroke="#3a3a3a" stroke-width="4"/><line x1="600" y1="870" x2="600" y2="1010" stroke="#3a3a3a" stroke-width="4"/><line x1="660" y1="870" x2="660" y2="1010" stroke="#3a3a3a" stroke-width="4"/><line x1="720" y1="870" x2="720" y2="1010" stroke="#3a3a3a" stroke-width="4"/><line x1="780" y1="870" x2="780" y2="1010" stroke="#3a3a3a" stroke-width="4"/><line x1="840" y1="870" x2="840" y2="1010" stroke="#3a3a3a" stroke-width="4"/>
+  <path d="M340 900 Q340 420 600 420 Q860 420 860 900 Z" fill="#0b0b0b" stroke="#0b0b0b" stroke-width="4"/>
+    <rect x="320" y="860" width="560" height="160" fill="#0b0b0b" stroke="#0b0b0b" stroke-width="4"/>
+    <line x1="360" y1="870" x2="360" y2="1010" stroke="#0b0b0b" stroke-width="4"/><line x1="420" y1="870" x2="420" y2="1010" stroke="#0b0b0b" stroke-width="4"/><line x1="480" y1="870" x2="480" y2="1010" stroke="#0b0b0b" stroke-width="4"/><line x1="540" y1="870" x2="540" y2="1010" stroke="#0b0b0b" stroke-width="4"/><line x1="600" y1="870" x2="600" y2="1010" stroke="#0b0b0b" stroke-width="4"/><line x1="660" y1="870" x2="660" y2="1010" stroke="#0b0b0b" stroke-width="4"/><line x1="720" y1="870" x2="720" y2="1010" stroke="#0b0b0b" stroke-width="4"/><line x1="780" y1="870" x2="780" y2="1010" stroke="#0b0b0b" stroke-width="4"/><line x1="840" y1="870" x2="840" y2="1010" stroke="#0b0b0b" stroke-width="4"/>
   
-  <text x="60" y="1400" font-family="ui-monospace, Menlo, monospace" font-size="28" fill="#f2f0ea" opacity="0.8">BEANIE — ACID</text>
-  <text x="60" y="1440" font-family="ui-monospace, Menlo, monospace" font-size="22" fill="#f2f0ea" opacity="0.45">MERINO BLEND</text>
-  <text x="1140" y="1440" text-anchor="end" font-family="ui-monospace, Menlo, monospace" font-size="22" fill="#c8ff00">DROP 01 · PLACEHOLDER</text>
+  <text x="60" y="1400" font-family="ui-monospace, Menlo, monospace" font-size="28" fill="#0b0b0b" opacity="0.8">BEANIE — ACID</text>
+  <text x="60" y="1440" font-family="ui-monospace, Menlo, monospace" font-size="22" fill="#0b0b0b" opacity="0.45">MERINO BLEND</text>
+  <text x="1140" y="1440" text-anchor="end" font-family="ui-monospace, Menlo, monospace" font-size="22" fill="#0b0b0b">DROP 01 · PLACEHOLDER</text>
 </svg>

@@ -17,12 +17,12 @@ export default function AdminPage() {
         <div className="flex gap-2">
           <a
             href="/api/admin/export"
-            className="inline-flex items-center h-10 px-4 border border-acido bg-acido text-asfalto font-mono text-[12px] uppercase tracking-[0.16em] hover:bg-calce hover:border-calce"
+            className="inline-flex items-center h-10 px-4 border border-inchiostro bg-inchiostro text-carta font-mono text-[12px] uppercase tracking-[0.16em] hover:bg-carta hover:text-inchiostro"
           >
             Esporta CSV
           </a>
           <form action="/api/admin/logout" method="post">
-            <button className="inline-flex items-center h-10 px-4 border border-line font-mono text-[12px] uppercase tracking-[0.16em] hover:border-acido hover:text-acido">
+            <button className="inline-flex items-center h-10 px-4 border border-line font-mono text-[12px] uppercase tracking-[0.16em] hover:border-inchiostro">
               Esci
             </button>
           </form>

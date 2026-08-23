@@ -29,7 +29,7 @@ export default function Home() {
             <li key={m.big}>
               <Reveal delay={i * 0.05} className="grid gap-4 py-8 md:grid-cols-12 md:items-baseline">
                 <h2 className="display md:col-span-7 text-[clamp(3rem,9vw,9rem)]">{m.big}</h2>
-                <p className="md:col-span-4 md:col-start-9 text-calce/75 text-[17px] leading-relaxed max-w-sm">{m.small}</p>
+                <p className="md:col-span-4 md:col-start-9 text-inchiostro/75 text-[17px] leading-relaxed max-w-sm">{m.small}</p>
               </Reveal>
             </li>
           ))}
@@ -43,7 +43,7 @@ export default function Home() {
             <p className="eyebrow mb-2">{site.drop.name} · In evidenza</p>
             <h2 className="display text-[clamp(2.5rem,6vw,5.5rem)]">Pezzi scelti</h2>
           </div>
-          <Link href="/collezione" className="hidden sm:inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.18em] hover:text-acido">
+          <Link href="/collezione" className="hidden sm:inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.18em] hover:underline underline-offset-4">
             Tutta la collezione <Arrow />
           </Link>
         </div>
@@ -63,20 +63,20 @@ export default function Home() {
 
       {/* Pre-order band */}
       <section className="mx-auto max-w-[1600px] px-5 md:px-8">
-        <Reveal className="border border-acido p-6 md:p-12 grid gap-8 md:grid-cols-12 md:items-end">
+        <Reveal className="border border-inchiostro p-6 md:p-12 grid gap-8 md:grid-cols-12 md:items-end">
           <div className="md:col-span-8">
-            <p className="eyebrow mb-4 text-acido">Pre-order aperto · drop il {dropDate}</p>
+            <p className="eyebrow mb-4 text-inchiostro">Pre-order aperto · drop il {dropDate}</p>
             <h2 className="display text-[clamp(3rem,10vw,10rem)]">
               Prendi il tuo
               <br />
               numero.
             </h2>
-            <p className="mt-6 max-w-lg text-calce/75 text-[17px]">
+            <p className="mt-6 max-w-lg text-inchiostro/75 text-[17px]">
               Lascia nome, email e telefono. Ogni pre-order riceve un numero progressivo: chi è in lista accede al drop prima di tutti.
             </p>
           </div>
           <div className="md:col-span-4 flex flex-col items-start md:items-end gap-4">
-            <p className="font-mono text-[64px] leading-none text-acido tabular-nums">{String(count + 1).padStart(4, "0")}</p>
+            <p className="font-mono text-[64px] leading-none text-inchiostro tabular-nums">{String(count + 1).padStart(4, "0")}</p>
             <p className="eyebrow -mt-2">il prossimo numero è il tuo</p>
             <ButtonLink href="/preorder" className="mt-2">
               Pre-ordina ora <Arrow />

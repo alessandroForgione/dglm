@@ -37,7 +37,7 @@ export function Nav() {
     <header
       className={clsx(
         "fixed inset-x-0 top-0 z-50 h-[var(--nav-h)] border-b transition-colors duration-300",
-        scrolled || open ? "bg-asfalto/85 backdrop-blur-md border-line" : "bg-transparent border-transparent",
+        scrolled || open ? "bg-carta/85 backdrop-blur-md border-line" : "bg-transparent border-transparent",
       )}
     >
       <div className="mx-auto flex h-full max-w-[1600px] items-center justify-between px-5 md:px-8">
@@ -49,8 +49,8 @@ export function Nav() {
               key={l.href}
               href={l.href}
               className={clsx(
-                "font-mono text-[12px] uppercase tracking-[0.18em] transition-colors hover:text-acido",
-                pathname === l.href ? "text-acido" : "text-calce/80",
+                "font-mono text-[12px] uppercase tracking-[0.18em] transition-colors hover:text-inchiostro underline-offset-4 hover:underline",
+                pathname === l.href ? "text-inchiostro underline" : "text-inchiostro/60",
               )}
             >
               {l.label}
@@ -63,7 +63,7 @@ export function Nav() {
 
         <button
           type="button"
-          className="md:hidden font-mono text-[12px] uppercase tracking-[0.18em] h-10 px-3 border border-calce/30"
+          className="md:hidden font-mono text-[12px] uppercase tracking-[0.18em] h-10 px-3 border border-inchiostro/30"
           aria-expanded={open}
           aria-controls="mobile-menu"
           onClick={() => setOpen((v) => !v)}
@@ -75,7 +75,7 @@ export function Nav() {
       <div
         id="mobile-menu"
         className={clsx(
-          "md:hidden fixed inset-x-0 top-[var(--nav-h)] bottom-0 bg-asfalto transition-opacity duration-200",
+          "md:hidden fixed inset-x-0 top-[var(--nav-h)] bottom-0 bg-carta transition-opacity duration-200",
           open ? "opacity-100" : "pointer-events-none opacity-0",
         )}
       >
@@ -83,7 +83,7 @@ export function Nav() {
           <ul className="flex flex-col">
             {links.map((l) => (
               <li key={l.href} className="border-b border-line">
-                <Link href={l.href} onClick={() => setOpen(false)} className="display block py-4 text-[56px] hover:text-acido">
+                <Link href={l.href} onClick={() => setOpen(false)} className="display block py-4 text-[56px] hover:text-inchiostro/60">
                   {l.label}
                 </Link>
               </li>

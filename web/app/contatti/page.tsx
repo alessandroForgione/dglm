@@ -15,7 +15,7 @@ export default function ContattiPage() {
     <section className="mx-auto max-w-[1600px] px-5 md:px-8 pt-[calc(var(--nav-h)+40px)] pb-16">
       <p className="eyebrow mb-3">Contatti</p>
       <h1 className="display text-[clamp(3.5rem,12vw,12rem)]">Scrivici.</h1>
-      <p className="mt-6 max-w-lg text-[17px] text-calce/80">
+      <p className="mt-6 max-w-lg text-[17px] text-inchiostro/80">
         Per collaborazioni, stampa, negozi o semplicemente per dirci qualcosa. Rispondiamo noi, non un bot.
       </p>
 
@@ -25,7 +25,7 @@ export default function ContattiPage() {
             <dt className="eyebrow">{r.label}</dt>
             <dd className="display text-[clamp(1.75rem,5vw,3.5rem)] leading-none break-all">
               {r.href ? (
-                <a href={r.href} target={r.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="hover:text-acido transition-colors">
+                <a href={r.href} target={r.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="hover:underline underline-offset-4 transition-colors">
                   {r.value}
                 </a>
               ) : (
