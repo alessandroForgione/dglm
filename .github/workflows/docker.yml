@@ -1,4 +1,4 @@
-name: Build & push image
+name: Build, push image & bump deployment
 
 on:
   push:
@@ -7,17 +7,22 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write     # per committare il nuovo tag in k8s/deployment.yaml
   packages: write
 
-env:
-  IMAGE: ghcr.io/${{ github.repository_owner }}/dglm-web
+concurrency:
+  group: build-main
+  cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Nome immagine (ghcr vuole minuscolo)
+        id: img
+        run: echo "name=ghcr.io/${GITHUB_REPOSITORY_OWNER,,}/dglm-web" >> "$GITHUB_OUTPUT"
 
       - uses: docker/setup-buildx-action@v3
 
@@ -30,12 +35,10 @@ jobs:
       - id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.IMAGE }}
-          # ghcr vuole il nome tutto minuscolo
+          images: ${{ steps.img.outputs.name }}
           flavor: latest=true
           tags: |
             type=sha,prefix=sha-,format=short
-            type=raw,value={{date 'YYYYMMDD-HHmm'}}
 
       - uses: docker/build-push-action@v6
         with:
@@ -47,5 +50,16 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Image tags
-        run: echo "${{ steps.meta.outputs.tags }}"
+      # GitOps: aggiorna il tag nel manifest → ArgoCD fa il rollout
+      - name: Bump tag in k8s/deployment.yaml
+        env:
+          IMAGE: ${{ steps.img.outputs.name }}
+        run: |
+          TAG="sha-$(git rev-parse --short=7 HEAD)"
+          sed -i -E "s#image: ghcr\.io/[^ ]+/dglm-web:[^ ]+#image: ${IMAGE}:${TAG}#" k8s/deployment.yaml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet; then echo "nessun cambiamento"; exit 0; fi
+          git commit -am "deploy: dglm-web ${TAG} [skip ci]"
+          git push
+          echo "→ ${IMAGE}:${TAG}"

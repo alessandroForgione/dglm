@@ -11,6 +11,7 @@ ENV_FILE="$ROOT/web/.env.production"
 [ -f "$ENV_FILE" ] || { echo "Manca $ENV_FILE (copia web/.env.example e compila i valori di produzione)"; exit 1; }
 grep -qE '^DATABASE_PATH=' "$ENV_FILE" && echo "nota: DATABASE_PATH in .env.production viene ignorato (il Deployment forza /data/dglm.db)"
 
+kubectl --context finow-hetzner get ns dglm >/dev/null 2>&1 || kubectl --context finow-hetzner create ns dglm
 $K create secret generic dglm-web-env --from-env-file="$ENV_FILE" --dry-run=client -o yaml | $K apply -f -
 echo "✓ secret dglm-web-env aggiornato"
 

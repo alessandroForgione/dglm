@@ -1,0 +1,27 @@
+# Applicare UNA volta sul cluster: kubectl --context finow-hetzner apply -f argocd/application.yaml
+# Da lì in poi ArgoCD sincronizza automaticamente la cartella k8s/ di questo repo (branch main).
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dglm
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/alessandroForgione/dglm.git
+    targetRevision: main
+    path: k8s
+    directory:
+      recurse: true
+      exclude: "secret.yaml.example"
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dglm
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

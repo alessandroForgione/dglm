@@ -6,9 +6,10 @@ Stack: Next.js 16 (App Router) · Tailwind 4 · Framer Motion · better-sqlite3 
 
 ```
 web/        app Next.js (tutto il sito)
-k8s/        manifest Kubernetes (namespace dglm)
-scripts/    secret, build/push, deploy
-.github/    GitHub Actions: build immagine → ghcr.io
+k8s/        manifest Kubernetes (namespace dglm) — sincronizzati da ArgoCD
+argocd/     Application ArgoCD (si applica una volta sola)
+scripts/    secret k8s, build/push locale di emergenza
+.github/    GitHub Actions: build immagine → ghcr.io → bump tag in k8s/
 ```
 
 ## Modificare i contenuti
@@ -21,7 +22,7 @@ scripts/    secret, build/push, deploy
 | Foto about | `web/public/images/about-atelier.svg` → sostituisci e aggiorna `app/about/page.tsx` |
 | Colori / font | `web/app/globals.css` (`@theme`) e `web/app/layout.tsx` (font) |
 
-Ogni modifica → commit + push su `main` → la GitHub Action builda l'immagine → `scripts/deploy.sh <tag>`.
+Ogni modifica → commit + push su `main` → la GitHub Action builda l'immagine e aggiorna il tag → ArgoCD fa il deploy. Zero comandi.
 
 ## Sviluppo locale
 
@@ -54,33 +55,33 @@ Il DB SQLite locale finisce in `web/data/dglm.db` (gitignored). Senza `RESEND_AP
 - Ogni pre-order ha un **numero progressivo** (id) mostrato all'utente.
 - `/admin` (password) → tabella con ricerca, **Esporta CSV**, Esci. Le rotte `/admin/*` sono protette da `web/proxy.ts`.
 
-## Immagine Docker
+## Deploy: GitOps con GitHub Actions + ArgoCD
 
-GitHub Actions (`.github/workflows/docker.yml`) builda `linux/amd64` e pusha su **`ghcr.io/alessandroforgione/dglm-web`** con tag `sha-<short>`, `<data>` e `latest` a ogni push su `main` che tocca `web/`.
-
-Dopo il primo push: su GitHub → Packages → `dglm-web` → *Package settings* → **Change visibility → Public** (così il cluster fa pull senza secret). In alternativa tieni il package privato e crea il pull secret con `scripts/k8s-secrets.sh --ghcr` + decommenta `imagePullSecrets` in `k8s/deployment.yaml`.
-
-Build locale (fallback): `scripts/build-push.sh [tag]` (serve `docker login ghcr.io` con PAT `write:packages`).
-
-## Deploy su Kubernetes (cluster `finow-hetzner`, namespace `dglm`)
-
-Prerequisiti: `KUBECONFIG=~/.kube/finow-hetzner.yaml`, context `finow-hetzner`. DNS: `dglm.it` e `www.dglm.it` → A `91.98.4.221` (senza DNS il pod gira lo stesso ma niente certificato TLS: test con `kubectl -n dglm port-forward svc/dglm-web 3000:3000`).
-
-```bash
-# 1. namespace
-kubectl --context finow-hetzner apply -f k8s/00-namespace.yaml
-# 2. secret (da web/.env.production, gitignored)
-cp web/.env.example web/.env.production   # compila i valori reali
-scripts/k8s-secrets.sh                    # aggiungi --ghcr se il package è privato
-# 3. tutto il resto
-kubectl --context finow-hetzner apply -f k8s/
-# 4. verifica
-kubectl --context finow-hetzner -n dglm get pods,svc,ingress,certificate
+```
+push su main (web/**) → Action builda linux/amd64 → push ghcr.io/alessandroforgione/dglm-web:sha-xxxxxxx
+                      → la stessa Action aggiorna il tag in k8s/deployment.yaml e committa ("[skip ci]")
+                      → ArgoCD (app "dglm") vede il commit → sync automatico → rollout del pod
 ```
 
-Aggiornamenti: `scripts/deploy.sh sha-xxxxxxx` (tag stampato dalla Action) oppure `scripts/deploy.sh latest` + `kubectl -n dglm rollout restart deploy/dglm-web`.
+Non fare `kubectl apply`/`set image` a mano: ArgoCD è in `selfHeal` e riallinea tutto a `k8s/` su `main`.
 
-Il DB vive sul PVC `dglm-data` (`/data/dglm.db`): sopravvive a riavvii e redeploy. Backup: `kubectl -n dglm exec deploy/dglm-web -- cat /data/dglm.db > backup.db`.
+### Setup una tantum
+
+1. **Package ghcr pubblico**: dopo il primo run della Action, su GitHub → Packages → `dglm-web` → *Package settings* → **Change visibility → Public**. (Alternativa: package privato + `scripts/k8s-secrets.sh --ghcr` e decommenta `imagePullSecrets` in `k8s/deployment.yaml`.)
+2. **Secret applicativo** (non sta in git): `cp web/.env.example web/.env.production`, compila i valori reali, poi `scripts/k8s-secrets.sh` (crea il namespace se manca).
+3. **ArgoCD Application**: `kubectl --context finow-hetzner apply -f argocd/application.yaml` — da qui in poi è tutto automatico.
+4. **DNS**: `dglm.it` e `www.dglm.it` → A `91.98.4.221`; cert-manager emette il certificato da solo (`kubectl -n dglm get certificate`).
+
+Senza DNS il pod gira comunque: `kubectl --context finow-hetzner -n dglm port-forward svc/dglm-web 3000:3000`.
+
+### Operatività
+
+- Stato: `kubectl --context finow-hetzner -n argocd get application dglm` oppure https://argocd.finow.app
+- Log: `kubectl --context finow-hetzner -n dglm logs deploy/dglm-web -f`
+- Rollback: `git revert` del commit "deploy: …" (o cambia il tag in `k8s/deployment.yaml`) e push.
+- Build locale di emergenza: `scripts/build-push.sh` (serve `docker login ghcr.io` con PAT `write:packages`), poi commit+push del `deployment.yaml` aggiornato.
+- Il DB vive sul PVC `dglm-data` (`/data/dglm.db`): sopravvive a riavvii e redeploy. Backup: `kubectl -n dglm exec deploy/dglm-web -- cat /data/dglm.db > backup.db`.
+- Cambi di secret (password admin, Resend): rilancia `scripts/k8s-secrets.sh` + `kubectl -n dglm rollout restart deploy/dglm-web`.
 
 ## Dopo il go-live
 
