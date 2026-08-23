@@ -16,6 +16,6 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ ok: false, error: "Password errata" }, { status: 401 });
   }
   const res = NextResponse.json({ ok: true });
-  res.cookies.set(SESSION_COOKIE, await createSessionToken(), sessionCookieOptions());
+  res.cookies.set(SESSION_COOKIE, await createSessionToken(), sessionCookieOptions(req));
   return res;
 }

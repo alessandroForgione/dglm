@@ -47,10 +47,22 @@ export function checkPassword(input: string): boolean {
   return a.length === b.length && timingSafeEqual(a, b);
 }
 
-export const sessionCookieOptions = (maxAge = DEFAULT_TTL_SEC) => ({
+/** true se la richiesta è arrivata in https (direttamente o dietro proxy/ingress). */
+export function isHttps(req: Request): boolean {
+  const fwd = req.headers.get("x-forwarded-proto")?.split(",")[0]?.trim();
+  if (fwd) return fwd === "https";
+  return new URL(req.url).protocol === "https:";
+}
+
+/**
+ * Opzioni del cookie di sessione. `Secure` segue il protocollo reale della richiesta,
+ * non NODE_ENV: così il login funziona anche via port-forward http://localhost
+ * (Safari scarta i cookie Secure su http), mentre su https resta Secure.
+ */
+export const sessionCookieOptions = (req: Request, maxAge = DEFAULT_TTL_SEC) => ({
   httpOnly: true,
   sameSite: "lax" as const,
-  secure: process.env.NODE_ENV === "production",
+  secure: isHttps(req),
   path: "/",
   maxAge,
 });
