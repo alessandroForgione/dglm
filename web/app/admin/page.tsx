@@ -12,7 +12,7 @@ export default function AdminPage() {
     <section className="mx-auto max-w-[1400px] px-5 md:px-8 py-10">
       <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
         <div>
-          <p className="display text-[32px] leading-none">DGLM</p>
+          <p className="display text-[40px] leading-none">DGLM</p>
           <h1 className="eyebrow mt-1">Pre-order · {rows.length} in lista</h1>
         </div>
         <div className="flex gap-2">

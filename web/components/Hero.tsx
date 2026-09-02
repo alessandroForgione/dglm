@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { site } from "@/content/site";
 import { ButtonLink, Arrow } from "./Button";
@@ -7,48 +8,49 @@ import { ButtonLink, Arrow } from "./Button";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 /**
- * Hero: il wordmark come serigrafia. Il layer grigio parte molto fuori registro
- * e "entra in registro" — resta un filo sfalsato, come una stampa a mano.
+ * Hero: foto lookbook a tutto schermo, wordmark serigrafato sopra.
+ * Un solo momento orchestrato: la foto entra (0–0.9s), il layer lime entra in registro
+ * (CSS, da 0.3s), la riga bassa sale (da 0.9s). Il testo visibile sta in uno span
+ * "relative" così viene dipinto sopra il layer lime, che resta in screen sulla foto.
  */
 export function Hero({ count }: { count: number }) {
   const reduce = useReducedMotion();
   return (
     <section className="relative min-h-[100svh] flex flex-col justify-between pt-[calc(var(--nav-h)+24px)] pb-8 px-5 md:px-8 overflow-hidden">
-      <div className="mx-auto w-full max-w-[1600px] flex items-center justify-between">
-        <motion.p
-          className="eyebrow"
-          initial={reduce ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.6, duration: 0.6 }}
-        >
-          {site.drop.name} · {site.drop.label} · Made in Italy
-        </motion.p>
-        <motion.p
-          className="eyebrow hidden sm:block"
-          initial={reduce ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.6 }}
-        >
-          {site.contact.city}
-        </motion.p>
+      <motion.div
+        className="absolute inset-0"
+        initial={reduce ? false : { opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.9 }}
+        aria-hidden
+      >
+        <Image src="/images/hero-lookbook.jpg" alt="" fill priority sizes="100vw" className="object-cover" />
+        <div className="absolute inset-0 bg-linear-to-t from-asfalto via-asfalto/35 to-asfalto/15" />
+      </motion.div>
+
+      <div className="relative mx-auto w-full max-w-[1600px] flex items-center justify-between">
+        <p className="eyebrow">
+          {site.drop.name} — {site.drop.label}
+        </p>
+        <p className="eyebrow hidden sm:block">{site.contact.city}</p>
       </div>
 
       <div className="relative w-full flex items-center justify-center py-6" aria-label={site.name}>
         <h1
-          className="hero-mark display misprint text-[30vw] md:text-[22vw] leading-[0.85] tracking-[-0.02em] select-none"
+          className="hero-mark display misprint text-[34vw] md:text-[26vw] leading-[0.8] tracking-[-0.03em] select-none"
           data-text="DGLM"
         >
-          DGLM
+          <span className="relative">DGLM</span>
         </h1>
       </div>
 
       <motion.div
-        className="mx-auto w-full max-w-[1600px] grid gap-6 md:grid-cols-12 md:items-end"
+        className="relative mx-auto w-full max-w-[1600px] grid gap-6 md:grid-cols-12 md:items-end"
         initial={reduce ? false : { opacity: 0, y: 16 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.9, duration: 0.8, ease }}
       >
-        <p className="md:col-span-5 text-[20px] md:text-[24px] leading-[1.3] font-normal text-inchiostro/85 max-w-md">
+        <p className="md:col-span-5 text-[22px] md:text-[28px] leading-[1.15] font-medium text-calce max-w-md">
           {site.tagline} Drop limitati, tagli netti, cotone pesante. Il primo drop apre in pre-order.
         </p>
         <div className="md:col-span-4 md:col-start-7 flex flex-wrap items-center gap-3">
@@ -60,7 +62,7 @@ export function Hero({ count }: { count: number }) {
           </ButtonLink>
         </div>
         <div className="md:col-span-2 md:text-right">
-          <p className="font-mono text-[36px] leading-none text-inchiostro tabular-nums">{String(count).padStart(4, "0")}</p>
+          <p className="font-mono text-[40px] leading-none text-acido tabular-nums">{String(count).padStart(4, "0")}</p>
           <p className="eyebrow mt-1">già in lista</p>
         </div>
       </motion.div>

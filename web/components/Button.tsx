@@ -2,15 +2,14 @@ import Link from "next/link";
 import clsx from "clsx";
 import type { ComponentProps } from "react";
 
-/** acid = primaria piena, ghost = superficie tonale, ink = carta con hairline. */
 type Variant = "acid" | "ghost" | "ink";
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-full font-sans text-[14px] font-medium px-6 h-11 transition-colors duration-200 select-none whitespace-nowrap";
+  "inline-flex items-center justify-center gap-2 font-mono text-[12px] uppercase tracking-[0.18em] px-5 h-12 border transition-colors duration-200 select-none whitespace-nowrap";
 const variants: Record<Variant, string> = {
-  acid: "bg-inchiostro text-carta hover:bg-inchiostro/85",
-  ghost: "bg-gesso text-inchiostro hover:bg-cenere",
-  ink: "bg-carta text-inchiostro border border-line hover:bg-gesso",
+  acid: "bg-acido text-asfalto border-acido hover:bg-calce hover:border-calce",
+  ghost: "bg-transparent text-calce border-calce/40 hover:border-acido hover:text-acido",
+  ink: "bg-calce text-asfalto border-calce hover:bg-acido hover:border-acido",
 };
 
 type LinkProps = ComponentProps<typeof Link> & { variant?: Variant };

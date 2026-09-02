@@ -12,8 +12,8 @@ export default function OG() {
         style={{
           width: "100%",
           height: "100%",
-          background: "#f7f5f0",
-          color: "#2a2825",
+          background: "#000000",
+          color: "#f2f0ea",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -21,16 +21,16 @@ export default function OG() {
           fontFamily: "Impact, Arial Narrow, sans-serif",
         }}
       >
-        <div style={{ fontSize: 26, letterSpacing: 4, color: "#7a766f", textTransform: "uppercase" }}>
-          {`${site.drop.name} · ${site.drop.label} · Made in Italy`}
+        <div style={{ fontSize: 26, letterSpacing: 4, color: "#8a8880", textTransform: "uppercase" }}>
+          {`${site.drop.name} — ${site.drop.label}`}
         </div>
         <div style={{ position: "relative", display: "flex" }}>
-          <div style={{ position: "absolute", left: 10, top: -10, fontSize: 360, lineHeight: 0.8, color: "#cfcac0" }}>DGLM</div>
+          <div style={{ position: "absolute", left: 10, top: -10, fontSize: 360, lineHeight: 0.8, color: "#c8ff00" }}>DGLM</div>
           <div style={{ fontSize: 360, lineHeight: 0.8 }}>DGLM</div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 30 }}>
           <span>{site.tagline}</span>
-          <span style={{ textDecoration: "underline", textUnderlineOffset: 6 }}>PRE-ORDER OPEN</span>
+          <span style={{ color: "#c8ff00" }}>PRE-ORDER OPEN</span>
         </div>
       </div>
     ),

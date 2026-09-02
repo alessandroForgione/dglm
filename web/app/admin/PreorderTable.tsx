@@ -21,17 +21,17 @@ export function PreorderTable({ rows }: { rows: PreorderRow[] }) {
         placeholder="Cerca nome, email, telefono…"
         value={q}
         onChange={(e) => setQ(e.target.value)}
-        className="mb-4 w-full max-w-md rounded-full bg-gesso border border-transparent px-4 h-11 text-inchiostro focus:border-inchiostro/30 focus:outline-none transition-colors"
+        className="mb-4 w-full max-w-md bg-transparent border border-line px-3 h-11 text-calce focus:border-acido focus:outline-none"
         aria-label="Cerca"
       />
       {list.length === 0 ? (
-        <p className="rounded-[var(--radius-lg)] bg-gesso p-8 text-grigio">
+        <p className="border border-line p-8 text-fumo">
           {rows.length === 0 ? "Nessun pre-order ancora. Il primo arriverà dalla pagina /preorder." : "Nessun risultato per la ricerca."}
         </p>
       ) : (
-        <div className="overflow-x-auto rounded-[var(--radius-md)] bg-carta shadow-soft">
+        <div className="overflow-x-auto border border-line">
           <table className="w-full text-[14px]">
-            <thead className="bg-gesso">
+            <thead className="bg-cemento">
               <tr className="text-left">
                 {["N°", "Data", "Nome", "Cognome", "Email", "Telefono"].map((h) => (
                   <th key={h} className="eyebrow font-normal px-4 py-3 whitespace-nowrap">{h}</th>
@@ -40,13 +40,13 @@ export function PreorderTable({ rows }: { rows: PreorderRow[] }) {
             </thead>
             <tbody className="divide-y divide-line">
               {list.map((r) => (
-                <tr key={r.id} className="hover:bg-gesso/60">
-                  <td className="px-4 py-3 font-mono text-inchiostro tabular-nums">{String(r.id).padStart(4, "0")}</td>
-                  <td className="px-4 py-3 font-mono tabular-nums whitespace-nowrap text-inchiostro/70">{fmt(r.createdAt)}</td>
+                <tr key={r.id} className="hover:bg-cemento/60">
+                  <td className="px-4 py-3 font-mono text-calce tabular-nums">{String(r.id).padStart(4, "0")}</td>
+                  <td className="px-4 py-3 font-mono tabular-nums whitespace-nowrap text-calce/70">{fmt(r.createdAt)}</td>
                   <td className="px-4 py-3">{r.firstName}</td>
                   <td className="px-4 py-3">{r.lastName}</td>
-                  <td className="px-4 py-3"><a className="transition-colors hover:text-grigio" href={`mailto:${r.email}`}>{r.email}</a></td>
-                  <td className="px-4 py-3 font-mono"><a className="transition-colors hover:text-grigio" href={`tel:${r.phone}`}>{r.phone}</a></td>
+                  <td className="px-4 py-3"><a className="hover:text-acido" href={`mailto:${r.email}`}>{r.email}</a></td>
+                  <td className="px-4 py-3 font-mono"><a className="hover:text-acido" href={`tel:${r.phone}`}>{r.phone}</a></td>
                 </tr>
               ))}
             </tbody>

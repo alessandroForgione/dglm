@@ -13,19 +13,18 @@ const rows = [
 export default function ContattiPage() {
   return (
     <section className="mx-auto max-w-[1600px] px-5 md:px-8 pt-[calc(var(--nav-h)+40px)] pb-16">
-      <p className="eyebrow mb-3">Contatti</p>
-      <h1 className="headline text-[clamp(2.5rem,7vw,5rem)]">Scrivici.</h1>
-      <p className="mt-6 max-w-lg text-[17px] text-inchiostro/80">
+      <h1 className="display text-[clamp(3.5rem,12vw,12rem)]">Scrivici.</h1>
+      <p className="mt-6 max-w-lg text-[17px] text-calce/80">
         Per collaborazioni, stampa, negozi o semplicemente per dirci qualcosa. Rispondiamo noi, non un bot.
       </p>
 
-      <dl className="mt-14 divide-y divide-line max-w-3xl">
+      <dl className="mt-14 border-t border-line max-w-3xl">
         {rows.map((r) => (
-          <div key={r.label} className="grid grid-cols-[110px_1fr] sm:grid-cols-[160px_1fr] items-baseline gap-4 py-6">
+          <div key={r.label} className="grid grid-cols-[110px_1fr] sm:grid-cols-[160px_1fr] items-baseline gap-4 py-6 border-b border-line">
             <dt className="eyebrow">{r.label}</dt>
-            <dd className="headline text-[clamp(1.25rem,3vw,2rem)] break-all">
+            <dd className="display text-[clamp(1.75rem,5vw,3.5rem)] leading-none break-all">
               {r.href ? (
-                <a href={r.href} target={r.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="transition-colors hover:text-grigio">
+                <a href={r.href} target={r.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer" className="hover:text-acido transition-colors">
                   {r.value}
                 </a>
               ) : (

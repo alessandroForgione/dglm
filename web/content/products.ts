@@ -42,8 +42,8 @@ export const products: Product[] = [
     sizes: ["S", "M", "L", "XL"],
     color: "Nero",
     images: [
-      { src: "/images/products/heavy-tee-logo-1.svg", alt: "Heavy Tee Logo fronte" },
-      { src: "/images/products/heavy-tee-logo-2.svg", alt: "Heavy Tee Logo retro" },
+      { src: "/images/products/heavy-tee-logo-1.jpg", alt: "Heavy Tee nera oversize indossata, ritratto in studio scuro con occhiali da sole" },
+      { src: "/images/products/heavy-tee-logo-2.jpg", alt: "Heavy Tee nera indossata, ritratto in studio su fondo scuro" },
     ],
     featured: true,
   },
@@ -59,7 +59,7 @@ export const products: Product[] = [
     details: ["100% cotone organico 320 gsm", "Fit boxy / oversize", "Inchiostro fluo", "Made in Italy"],
     sizes: ["S", "M", "L", "XL"],
     color: "Nero / Lime",
-    images: [{ src: "/images/products/heavy-tee-acid-1.svg", alt: "Heavy Tee Acid fronte" }],
+    images: [{ src: "/images/products/heavy-tee-acid-1.jpg", alt: "Tee nera con catena al collo, ritratto notturno" }],
   },
   {
     slug: "garage-hoodie",
@@ -74,8 +74,8 @@ export const products: Product[] = [
     sizes: ["S", "M", "L", "XL"],
     color: "Nero",
     images: [
-      { src: "/images/products/garage-hoodie-1.svg", alt: "Garage Hoodie fronte" },
-      { src: "/images/products/garage-hoodie-2.svg", alt: "Garage Hoodie retro" },
+      { src: "/images/products/garage-hoodie-1.jpg", alt: "Felpa nera con cappuccio, appoggiato a una parete industriale" },
+      { src: "/images/products/garage-hoodie-2.jpg", alt: "Felpa nera con cappuccio vista di spalle, camminando di notte" },
     ],
     featured: true,
   },
@@ -91,7 +91,7 @@ export const products: Product[] = [
     details: ["Felpa 400 gsm", "Back print grande formato", "Fit oversize"],
     sizes: ["S", "M", "L", "XL"],
     color: "Grigio cemento",
-    images: [{ src: "/images/products/night-shift-crewneck-1.svg", alt: "Night Shift Crewneck" }],
+    images: [{ src: "/images/products/night-shift-crewneck-1.jpg", alt: "Girocollo grigio indossato, ritratto in bianco e nero dal basso" }],
   },
   {
     slug: "cargo-pant-01",
@@ -105,7 +105,7 @@ export const products: Product[] = [
     details: ["Cotone ripstop 280 gsm", "Gamba ampia", "6 tasche", "Coulisse al fondo"],
     sizes: ["28", "30", "32", "34", "36"],
     color: "Nero",
-    images: [{ src: "/images/products/cargo-pant-01-1.svg", alt: "Cargo Pant 01" }],
+    images: [{ src: "/images/products/cargo-pant-01-1.jpg", alt: "Cargo neri e tee nera davanti a un container" }],
     featured: true,
   },
   {
@@ -120,7 +120,7 @@ export const products: Product[] = [
     details: ["Nylon tecnico", "Zip al fondo", "Banda laterale a contrasto"],
     sizes: ["S", "M", "L", "XL"],
     color: "Nero / Lime",
-    images: [{ src: "/images/products/track-pant-acid-1.svg", alt: "Track Pant Acid Stripe" }],
+    images: [{ src: "/images/products/track-pant-acid-1.jpg", alt: "Pantaloni neri e giacca nera sui binari di uno scalo ferroviario" }],
   },
   {
     slug: "wordmark-cap",
@@ -133,7 +133,7 @@ export const products: Product[] = [
     details: ["Twill di cotone", "Taglia unica regolabile", "Ricamo 3D"],
     sizes: ["UNI"],
     color: "Nero",
-    images: [{ src: "/images/products/wordmark-cap-1.svg", alt: "Wordmark Cap" }],
+    images: [{ src: "/images/products/wordmark-cap-1.jpg", alt: "Cappellino nero e maglia nera, ritratto in ombra" }],
   },
   {
     slug: "beanie-acid",
@@ -146,7 +146,7 @@ export const products: Product[] = [
     details: ["Lana merino blend", "Taglia unica"],
     sizes: ["UNI"],
     color: "Lime",
-    images: [{ src: "/images/products/beanie-acid-1.svg", alt: "Beanie Acid" }],
+    images: [{ src: "/images/products/beanie-acid-1.jpg", alt: "Beanie nero e giacca nera, ritratto in penombra" }],
     featured: true,
   },
 ];
