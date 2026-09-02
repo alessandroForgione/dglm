@@ -24,11 +24,11 @@ export default function Home() {
       {/* Manifesto: tre affermazioni, una sotto l'altra */}
       <section className="mx-auto max-w-[1600px] px-5 md:px-8 py-24 md:py-36">
         <p className="eyebrow mb-10">Manifesto</p>
-        <ol className="divide-y divide-line border-y border-line">
+        <ol className="flex flex-col gap-2">
           {site.manifesto.map((m, i) => (
             <li key={m.big}>
-              <Reveal delay={i * 0.05} className="grid gap-4 py-8 md:grid-cols-12 md:items-baseline">
-                <h2 className="display md:col-span-7 text-[clamp(3rem,9vw,9rem)]">{m.big}</h2>
+              <Reveal delay={i * 0.05} className="grid gap-4 py-6 md:grid-cols-12 md:items-baseline">
+                <h2 className="headline md:col-span-7 text-[clamp(2rem,5vw,4.25rem)]">{m.big}</h2>
                 <p className="md:col-span-4 md:col-start-9 text-inchiostro/75 text-[17px] leading-relaxed max-w-sm">{m.small}</p>
               </Reveal>
             </li>
@@ -41,9 +41,9 @@ export default function Home() {
         <div className="flex items-end justify-between mb-8">
           <div>
             <p className="eyebrow mb-2">{site.drop.name} · In evidenza</p>
-            <h2 className="display text-[clamp(2.5rem,6vw,5.5rem)]">Pezzi scelti</h2>
+            <h2 className="headline text-[clamp(1.75rem,3.5vw,2.75rem)]">Pezzi scelti</h2>
           </div>
-          <Link href="/collezione" className="hidden sm:inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.18em] hover:underline underline-offset-4">
+          <Link href="/collezione" className="hidden sm:inline-flex items-center gap-2 font-sans text-[14px] font-medium text-grigio transition-colors hover:text-inchiostro">
             Tutta la collezione <Arrow />
           </Link>
         </div>
@@ -63,10 +63,10 @@ export default function Home() {
 
       {/* Pre-order band */}
       <section className="mx-auto max-w-[1600px] px-5 md:px-8">
-        <Reveal className="border border-inchiostro p-6 md:p-12 grid gap-8 md:grid-cols-12 md:items-end">
+        <Reveal className="rounded-[var(--radius-lg)] bg-gesso p-6 md:p-12 grid gap-8 md:grid-cols-12 md:items-end">
           <div className="md:col-span-8">
-            <p className="eyebrow mb-4 text-inchiostro">Pre-order aperto · drop il {dropDate}</p>
-            <h2 className="display text-[clamp(3rem,10vw,10rem)]">
+            <p className="eyebrow mb-4">Pre-order aperto · drop il {dropDate}</p>
+            <h2 className="headline text-[clamp(2.25rem,6vw,5rem)]">
               Prendi il tuo
               <br />
               numero.
@@ -76,7 +76,7 @@ export default function Home() {
             </p>
           </div>
           <div className="md:col-span-4 flex flex-col items-start md:items-end gap-4">
-            <p className="font-mono text-[64px] leading-none text-inchiostro tabular-nums">{String(count + 1).padStart(4, "0")}</p>
+            <p className="font-mono text-[56px] leading-none text-inchiostro tabular-nums">{String(count + 1).padStart(4, "0")}</p>
             <p className="eyebrow -mt-2">il prossimo numero è il tuo</p>
             <ButtonLink href="/preorder" className="mt-2">
               Pre-ordina ora <Arrow />

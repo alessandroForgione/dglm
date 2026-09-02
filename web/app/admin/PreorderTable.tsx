@@ -21,15 +21,15 @@ export function PreorderTable({ rows }: { rows: PreorderRow[] }) {
         placeholder="Cerca nome, email, telefono…"
         value={q}
         onChange={(e) => setQ(e.target.value)}
-        className="mb-4 w-full max-w-md bg-transparent border border-line px-3 h-11 text-inchiostro focus:border-inchiostro focus:outline-none"
+        className="mb-4 w-full max-w-md rounded-full bg-gesso border border-transparent px-4 h-11 text-inchiostro focus:border-inchiostro/30 focus:outline-none transition-colors"
         aria-label="Cerca"
       />
       {list.length === 0 ? (
-        <p className="border border-line p-8 text-grigio">
+        <p className="rounded-[var(--radius-lg)] bg-gesso p-8 text-grigio">
           {rows.length === 0 ? "Nessun pre-order ancora. Il primo arriverà dalla pagina /preorder." : "Nessun risultato per la ricerca."}
         </p>
       ) : (
-        <div className="overflow-x-auto border border-line">
+        <div className="overflow-x-auto rounded-[var(--radius-md)] bg-carta shadow-soft">
           <table className="w-full text-[14px]">
             <thead className="bg-gesso">
               <tr className="text-left">
@@ -45,8 +45,8 @@ export function PreorderTable({ rows }: { rows: PreorderRow[] }) {
                   <td className="px-4 py-3 font-mono tabular-nums whitespace-nowrap text-inchiostro/70">{fmt(r.createdAt)}</td>
                   <td className="px-4 py-3">{r.firstName}</td>
                   <td className="px-4 py-3">{r.lastName}</td>
-                  <td className="px-4 py-3"><a className="hover:underline underline-offset-4" href={`mailto:${r.email}`}>{r.email}</a></td>
-                  <td className="px-4 py-3 font-mono"><a className="hover:underline underline-offset-4" href={`tel:${r.phone}`}>{r.phone}</a></td>
+                  <td className="px-4 py-3"><a className="transition-colors hover:text-grigio" href={`mailto:${r.email}`}>{r.email}</a></td>
+                  <td className="px-4 py-3 font-mono"><a className="transition-colors hover:text-grigio" href={`tel:${r.phone}`}>{r.phone}</a></td>
                 </tr>
               ))}
             </tbody>

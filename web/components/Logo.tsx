@@ -1,7 +1,7 @@
 import Link from "next/link";
 import clsx from "clsx";
 
-/** Wordmark DGLM: display type + layer lime fuori registro. */
+/** Wordmark DGLM: display type + layer grigio fuori registro. */
 export function Logo({ className, size = "md" }: { className?: string; size?: "sm" | "md" }) {
   return (
     <Link

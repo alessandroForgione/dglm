@@ -12,8 +12,8 @@ export default function OG() {
         style={{
           width: "100%",
           height: "100%",
-          background: "#ffffff",
-          color: "#0b0b0b",
+          background: "#f7f5f0",
+          color: "#2a2825",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -21,11 +21,11 @@ export default function OG() {
           fontFamily: "Impact, Arial Narrow, sans-serif",
         }}
       >
-        <div style={{ fontSize: 26, letterSpacing: 4, color: "#6b6b6b", textTransform: "uppercase" }}>
+        <div style={{ fontSize: 26, letterSpacing: 4, color: "#7a766f", textTransform: "uppercase" }}>
           {`${site.drop.name} · ${site.drop.label} · Made in Italy`}
         </div>
         <div style={{ position: "relative", display: "flex" }}>
-          <div style={{ position: "absolute", left: 10, top: -10, fontSize: 360, lineHeight: 0.8, color: "#b8b8b8" }}>DGLM</div>
+          <div style={{ position: "absolute", left: 10, top: -10, fontSize: 360, lineHeight: 0.8, color: "#cfcac0" }}>DGLM</div>
           <div style={{ fontSize: 360, lineHeight: 0.8 }}>DGLM</div>
         </div>
         <div style={{ display: "flex", justifyContent: "space-between", fontSize: 30 }}>

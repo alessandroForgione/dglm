@@ -37,7 +37,7 @@ export function Nav() {
     <header
       className={clsx(
         "fixed inset-x-0 top-0 z-50 h-[var(--nav-h)] border-b transition-colors duration-300",
-        scrolled || open ? "bg-carta/85 backdrop-blur-md border-line" : "bg-transparent border-transparent",
+        scrolled || open ? "bg-carta/80 backdrop-blur-md border-line" : "bg-transparent border-transparent",
       )}
     >
       <div className="mx-auto flex h-full max-w-[1600px] items-center justify-between px-5 md:px-8">
@@ -49,8 +49,8 @@ export function Nav() {
               key={l.href}
               href={l.href}
               className={clsx(
-                "font-mono text-[12px] uppercase tracking-[0.18em] transition-colors hover:text-inchiostro underline-offset-4 hover:underline",
-                pathname === l.href ? "text-inchiostro underline" : "text-inchiostro/60",
+                "font-sans text-[14px] font-medium transition-colors hover:text-inchiostro",
+                pathname === l.href ? "text-inchiostro" : "text-grigio",
               )}
             >
               {l.label}
@@ -63,7 +63,7 @@ export function Nav() {
 
         <button
           type="button"
-          className="md:hidden font-mono text-[12px] uppercase tracking-[0.18em] h-10 px-3 border border-inchiostro/30"
+          className="md:hidden rounded-full bg-gesso font-sans text-[14px] font-medium h-10 px-4 transition-colors hover:bg-cenere"
           aria-expanded={open}
           aria-controls="mobile-menu"
           onClick={() => setOpen((v) => !v)}
@@ -82,14 +82,14 @@ export function Nav() {
         <nav className="flex h-full flex-col justify-between px-5 pb-8 pt-6" aria-label="Mobile">
           <ul className="flex flex-col">
             {links.map((l) => (
-              <li key={l.href} className="border-b border-line">
-                <Link href={l.href} onClick={() => setOpen(false)} className="display block py-4 text-[56px] hover:text-inchiostro/60">
+              <li key={l.href}>
+                <Link href={l.href} onClick={() => setOpen(false)} className="headline block py-3 text-[40px] hover:text-grigio transition-colors">
                   {l.label}
                 </Link>
               </li>
             ))}
           </ul>
-          <ButtonLink href="/preorder" onClick={() => setOpen(false)} className="w-full h-14 text-[13px]">
+          <ButtonLink href="/preorder" onClick={() => setOpen(false)} className="w-full h-14 text-[15px]">
             Pre-ordina ora
           </ButtonLink>
         </nav>

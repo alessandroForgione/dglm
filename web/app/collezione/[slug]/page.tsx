@@ -31,7 +31,7 @@ export default async function ProductPage({ params }: PageProps<"/collezione/[sl
   return (
     <article className="mx-auto max-w-[1600px] px-5 md:px-8 pt-[calc(var(--nav-h)+24px)] pb-16">
       <nav className="eyebrow mb-6 flex items-center gap-2" aria-label="Percorso">
-        <Link href="/collezione" className="hover:underline underline-offset-4">Collezione</Link>
+        <Link href="/collezione" className="transition-colors hover:text-inchiostro">Collezione</Link>
         <span>/</span>
         <span className="text-inchiostro/70">{p.tag}</span>
       </nav>
@@ -43,7 +43,7 @@ export default async function ProductPage({ params }: PageProps<"/collezione/[sl
             {p.images.map((img, i) => (
               <div
                 key={img.src}
-                className="relative shrink-0 snap-start w-[82vw] sm:w-[60vw] lg:w-full aspect-[4/5] border border-line bg-gesso"
+                className="relative shrink-0 snap-start w-[82vw] sm:w-[60vw] lg:w-full aspect-[4/5] rounded-[var(--radius-lg)] overflow-hidden bg-gesso"
               >
                 <Image src={img.src} alt={img.alt} fill priority={i === 0} sizes="(min-width:1024px) 55vw, 82vw" className="object-cover" />
               </div>
@@ -53,10 +53,10 @@ export default async function ProductPage({ params }: PageProps<"/collezione/[sl
 
         <div className="lg:col-span-5 lg:sticky lg:top-[calc(var(--nav-h)+24px)] lg:self-start">
           <p className="eyebrow mb-3">{site.drop.name} · {p.color}</p>
-          <h1 className="display text-[clamp(3rem,7vw,6.5rem)]">{p.name}</h1>
+          <h1 className="headline text-[clamp(2rem,4.5vw,3.5rem)]">{p.name}</h1>
           <div className="mt-4 flex items-baseline gap-4">
-            <p className="font-mono text-[28px] tabular-nums">{formatPrice(p.price)}</p>
-            <p className={p.status === "soldout" ? "eyebrow text-grigio line-through" : "eyebrow text-inchiostro"}>
+            <p className="font-mono text-[24px] tabular-nums">{formatPrice(p.price)}</p>
+            <p className={p.status === "soldout" ? "eyebrow line-through" : "eyebrow"}>
               {p.status === "preorder" ? "Pre-order" : p.status === "soldout" ? "Sold out" : "Disponibile"}
             </p>
           </div>
@@ -67,7 +67,7 @@ export default async function ProductPage({ params }: PageProps<"/collezione/[sl
             <p className="eyebrow mb-3">Taglie</p>
             <ul className="flex flex-wrap gap-2">
               {p.sizes.map((s) => (
-                <li key={s} className="font-mono text-[13px] h-10 min-w-10 px-3 inline-flex items-center justify-center border border-line">
+                <li key={s} className="font-mono text-[13px] h-10 min-w-10 px-3 inline-flex items-center justify-center rounded-full bg-gesso">
                   {s}
                 </li>
               ))}
@@ -75,9 +75,9 @@ export default async function ProductPage({ params }: PageProps<"/collezione/[sl
           </div>
 
           {/* Scheda tecnica in stile etichetta */}
-          <dl className="mt-8 border border-line divide-y divide-line">
+          <dl className="mt-8 divide-y divide-line">
             {p.details.map((d) => (
-              <div key={d} className="px-4 py-3 font-mono text-[13px]">
+              <div key={d} className="py-3 font-mono text-[13px] text-inchiostro/85">
                 {d}
               </div>
             ))}

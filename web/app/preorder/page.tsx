@@ -16,8 +16,8 @@ export default function PreorderPage() {
     <section className="mx-auto max-w-[1600px] px-5 md:px-8 pt-[calc(var(--nav-h)+40px)] pb-16">
       <div className="grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-5">
-          <p className="eyebrow mb-3 text-inchiostro">Pre-order aperto · drop il {dropDate}</p>
-          <h1 className="display text-[clamp(3.5rem,11vw,10rem)]">
+          <p className="eyebrow mb-3">Pre-order aperto · drop il {dropDate}</p>
+          <h1 className="headline text-[clamp(2.25rem,6vw,4.5rem)]">
             Prendi il<br />tuo numero.
           </h1>
           <p className="mt-8 max-w-md text-[17px] text-inchiostro/80">
@@ -26,11 +26,11 @@ export default function PreorderPage() {
           <dl className="mt-10 grid grid-cols-2 gap-6 max-w-md">
             <div>
               <dt className="eyebrow">In lista</dt>
-              <dd className="font-mono text-[40px] leading-none tabular-nums mt-1">{String(count).padStart(4, "0")}</dd>
+              <dd className="font-mono text-[36px] leading-none tabular-nums mt-1 text-inchiostro/70">{String(count).padStart(4, "0")}</dd>
             </div>
             <div>
               <dt className="eyebrow">Prossimo numero</dt>
-              <dd className="font-mono text-[40px] leading-none tabular-nums mt-1 text-inchiostro">{String(count + 1).padStart(4, "0")}</dd>
+              <dd className="font-mono text-[36px] leading-none tabular-nums mt-1 text-inchiostro">{String(count + 1).padStart(4, "0")}</dd>
             </div>
           </dl>
         </div>

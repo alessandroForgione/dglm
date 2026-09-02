@@ -7,7 +7,7 @@ import { ButtonLink, Arrow } from "./Button";
 const ease = [0.16, 1, 0.3, 1] as const;
 
 /**
- * Hero: il wordmark come serigrafia. Il layer lime parte molto fuori registro
+ * Hero: il wordmark come serigrafia. Il layer grigio parte molto fuori registro
  * e "entra in registro" — resta un filo sfalsato, come una stampa a mano.
  */
 export function Hero({ count }: { count: number }) {
@@ -35,7 +35,7 @@ export function Hero({ count }: { count: number }) {
 
       <div className="relative w-full flex items-center justify-center py-6" aria-label={site.name}>
         <h1
-          className="hero-mark display misprint text-[44vw] md:text-[34vw] leading-[0.8] tracking-[-0.03em] select-none"
+          className="hero-mark display misprint text-[30vw] md:text-[22vw] leading-[0.85] tracking-[-0.02em] select-none"
           data-text="DGLM"
         >
           DGLM
@@ -48,7 +48,7 @@ export function Hero({ count }: { count: number }) {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.9, duration: 0.8, ease }}
       >
-        <p className="md:col-span-5 text-[22px] md:text-[28px] leading-[1.15] font-medium text-inchiostro max-w-md">
+        <p className="md:col-span-5 text-[20px] md:text-[24px] leading-[1.3] font-normal text-inchiostro/85 max-w-md">
           {site.tagline} Drop limitati, tagli netti, cotone pesante. Il primo drop apre in pre-order.
         </p>
         <div className="md:col-span-4 md:col-start-7 flex flex-wrap items-center gap-3">
@@ -60,7 +60,7 @@ export function Hero({ count }: { count: number }) {
           </ButtonLink>
         </div>
         <div className="md:col-span-2 md:text-right">
-          <p className="font-mono text-[40px] leading-none text-inchiostro tabular-nums">{String(count).padStart(4, "0")}</p>
+          <p className="font-mono text-[36px] leading-none text-inchiostro tabular-nums">{String(count).padStart(4, "0")}</p>
           <p className="eyebrow mt-1">già in lista</p>
         </div>
       </motion.div>

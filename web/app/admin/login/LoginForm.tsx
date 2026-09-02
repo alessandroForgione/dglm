@@ -34,10 +34,10 @@ export function LoginForm() {
           autoComplete="current-password"
           required
           autoFocus
-          className="mt-2 w-full bg-transparent border border-line px-3 h-12 text-inchiostro focus:border-inchiostro focus:outline-none"
+          className="mt-2 w-full rounded-[var(--radius-md)] bg-gesso border border-transparent px-4 h-12 text-inchiostro focus:border-inchiostro/30 focus:outline-none transition-colors"
         />
       </label>
-      {error && <p role="alert" className="font-mono text-[12px] uppercase tracking-[0.12em] text-inchiostro">{error}</p>}
+      {error && <p role="alert" className="rounded-[var(--radius-md)] bg-cenere px-4 py-3 text-[14px] text-inchiostro">{error}</p>}
       <Button type="submit" disabled={loading} className="w-full">
         {loading ? "Accesso…" : "Entra"}
       </Button>

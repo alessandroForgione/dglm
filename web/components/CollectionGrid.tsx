@@ -22,8 +22,8 @@ export function CollectionGrid() {
               aria-selected={on}
               onClick={() => setActive(t)}
               className={clsx(
-                "font-mono text-[12px] uppercase tracking-[0.16em] h-10 px-4 border transition-colors",
-                on ? "bg-inchiostro text-carta border-inchiostro" : "border-line text-inchiostro/70 hover:border-inchiostro hover:text-inchiostro",
+                "rounded-full font-sans text-[14px] font-medium h-10 px-4 transition-colors",
+                on ? "bg-inchiostro text-carta" : "bg-gesso text-inchiostro/80 hover:bg-cenere hover:text-inchiostro",
               )}
             >
               {t} <span className={clsx("ml-1", on ? "text-carta/60" : "text-grigio")}>{n}</span>

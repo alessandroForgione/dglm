@@ -11,10 +11,10 @@ export default function AboutPage() {
   return (
     <section className="mx-auto max-w-[1600px] px-5 md:px-8 pt-[calc(var(--nav-h)+40px)] pb-16">
       <p className="eyebrow mb-3">About · {site.contact.city}</p>
-      <h1 className="display text-[clamp(3rem,10vw,11rem)] max-w-[12ch]">{a.headline}</h1>
+      <h1 className="headline text-[clamp(2.25rem,6vw,4.5rem)] max-w-[14ch]">{a.headline}</h1>
 
       <div className="mt-16 grid gap-10 lg:grid-cols-12">
-        <Reveal className="lg:col-span-7 relative aspect-[16/10] border border-line bg-gesso">
+        <Reveal className="lg:col-span-7 relative aspect-[16/10] rounded-[var(--radius-lg)] overflow-hidden bg-gesso">
           <Image src="/images/about-atelier.svg" alt="L'atelier DGLM" fill priority sizes="(min-width:1024px) 58vw, 100vw" className="object-cover" />
         </Reveal>
         <div className="lg:col-span-4 lg:col-start-9 space-y-6 text-[17px] leading-relaxed text-inchiostro/85">
@@ -27,12 +27,12 @@ export default function AboutPage() {
       </div>
 
       {/* Valori, impaginati come un'etichetta di composizione */}
-      <Reveal className="mt-24 border border-line">
-        <div className="px-5 py-3 border-b border-line eyebrow">Etichetta · composizione del brand</div>
-        <dl className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-line">
+      <Reveal className="mt-24 rounded-[var(--radius-lg)] bg-gesso">
+        <div className="px-6 pt-5 eyebrow">Etichetta · composizione del brand</div>
+        <dl className="grid md:grid-cols-3 gap-2">
           {a.values.map((v) => (
             <div key={v.title} className="p-6">
-              <dt className="display text-[44px] leading-none">{v.title}</dt>
+              <dt className="headline text-[28px]">{v.title}</dt>
               <dd className="mt-3 text-inchiostro/75">{v.text}</dd>
             </div>
           ))}
@@ -43,11 +43,11 @@ export default function AboutPage() {
       <div className="mt-24 grid gap-8 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <p className="eyebrow mb-3">Cronologia</p>
-          <h2 className="display text-[clamp(2.5rem,6vw,5rem)]">Da zero al drop</h2>
+          <h2 className="headline text-[clamp(1.75rem,3.5vw,2.75rem)]">Da zero al drop</h2>
         </div>
-        <ol className="lg:col-span-8 border-t border-line">
+        <ol className="lg:col-span-8 divide-y divide-line">
           {a.timeline.map((t) => (
-            <li key={t.when} className="grid grid-cols-[120px_1fr] gap-6 py-5 border-b border-line">
+            <li key={t.when} className="grid grid-cols-[120px_1fr] gap-6 py-5">
               <span className="font-mono text-[13px] text-inchiostro tabular-nums">{t.when}</span>
               <span className="text-inchiostro/85">{t.what}</span>
             </li>

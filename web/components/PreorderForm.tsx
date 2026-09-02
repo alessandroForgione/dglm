@@ -14,9 +14,9 @@ type State =
   | { kind: "done"; status: "created" | "duplicate"; number: number | null };
 
 const inputCls =
-  "peer w-full bg-transparent border-b border-line py-3 text-[18px] text-inchiostro placeholder-transparent focus:border-inchiostro focus:outline-none transition-colors aria-[invalid=true]:border-inchiostro";
+  "peer w-full bg-transparent border-b border-inchiostro/20 py-3 text-[18px] text-inchiostro placeholder-transparent focus:border-inchiostro/60 focus:outline-none transition-colors aria-[invalid=true]:border-inchiostro/60";
 const labelCls =
-  "pointer-events-none absolute left-0 top-3 font-mono text-[11px] uppercase tracking-[0.18em] text-grigio transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-[14px] peer-placeholder-shown:tracking-normal peer-placeholder-shown:normal-case peer-focus:-top-3 peer-focus:text-[11px] peer-focus:uppercase peer-focus:tracking-[0.18em] peer-focus:text-inchiostro -top-3";
+  "pointer-events-none absolute left-0 top-3 font-sans text-[12px] text-grigio transition-all peer-placeholder-shown:top-3 peer-placeholder-shown:text-[16px] peer-focus:-top-3 peer-focus:text-[12px] peer-focus:text-inchiostro -top-3";
 
 function FieldBox({
   id, label, error, children,
@@ -26,7 +26,7 @@ function FieldBox({
       {children}
       <label htmlFor={id} className={labelCls}>{label}</label>
       {error && (
-        <p id={`${id}-error`} className="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-inchiostro">
+        <p id={`${id}-error`} className="mt-2 font-sans text-[13px] text-inchiostro/80">
           {error}
         </p>
       )}
@@ -76,16 +76,16 @@ export function PreorderForm({ nextNumber }: { nextNumber: number }) {
           initial={reduce ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="border border-inchiostro p-6 md:p-10"
+          className="rounded-[var(--radius-lg)] bg-gesso p-6 md:p-10"
           role="status"
           aria-live="polite"
         >
           <p className="eyebrow text-inchiostro">{state.status === "duplicate" ? "Eri già in lista" : "Pre-order registrato"}</p>
-          <p className="display mt-3 text-[clamp(3rem,12vw,9rem)]">Sei dentro.</p>
+          <p className="headline mt-3 text-[clamp(2rem,6vw,4rem)]">Sei dentro.</p>
           {state.number != null && (
             <div className="mt-6 flex items-baseline gap-4">
               <span className="eyebrow">Il tuo numero</span>
-              <span className="font-mono text-[56px] md:text-[80px] leading-none text-inchiostro tabular-nums">
+              <span className="font-mono text-[48px] md:text-[64px] leading-none text-inchiostro tabular-nums">
                 N°{String(state.number).padStart(4, "0")}
               </span>
             </div>
@@ -103,10 +103,10 @@ export function PreorderForm({ nextNumber }: { nextNumber: number }) {
           key="form"
           onSubmit={onSubmit}
           noValidate
-          className="border border-line p-6 md:p-10"
+          className="rounded-[var(--radius-lg)] bg-gesso p-6 md:p-10"
           exit={reduce ? undefined : { opacity: 0, y: -10 }}
         >
-          <div className="flex items-baseline justify-between gap-4 border-b border-line pb-4 mb-2">
+          <div className="flex items-baseline justify-between gap-4 border-b border-inchiostro/10 pb-4 mb-2">
             <p className="eyebrow">{site.drop.name} · Lista d&apos;attesa</p>
             <p className="font-mono text-[13px] text-inchiostro tabular-nums">N°{String(nextNumber).padStart(4, "0")}</p>
           </div>
@@ -137,23 +137,23 @@ export function PreorderForm({ nextNumber }: { nextNumber: number }) {
               type="checkbox"
               name="consent"
               required
-              className="mt-1 h-4 w-4 shrink-0 appearance-none border border-inchiostro/40 checked:bg-inchiostro checked:border-inchiostro focus-visible:outline-2 focus-visible:outline-inchiostro"
+              className="mt-1 h-4 w-4 shrink-0 appearance-none rounded-[4px] border border-inchiostro/30 checked:bg-inchiostro checked:border-inchiostro transition-colors"
               aria-invalid={!!errs.consent}
             />
             <span className="text-[14px] text-inchiostro/75">
               Acconsento al trattamento dei dati per ricevere comunicazioni su {site.drop.name}. Niente spam, puoi uscire dalla lista quando vuoi.
             </span>
           </label>
-          {errs.consent && <p className="mt-2 font-mono text-[11px] uppercase tracking-[0.12em] text-inchiostro">{errs.consent}</p>}
+          {errs.consent && <p className="mt-2 font-sans text-[13px] text-inchiostro/80">{errs.consent}</p>}
 
           {state.kind === "error" && state.message && (
-            <p role="alert" className="mt-6 border border-inchiostro px-4 py-3 font-mono text-[12px] uppercase tracking-[0.12em] text-inchiostro">
+            <p role="alert" className="mt-6 rounded-[var(--radius-md)] bg-cenere px-4 py-3 text-[14px] text-inchiostro">
               {state.message}
             </p>
           )}
 
           <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Button type="submit" disabled={state.kind === "loading"} className={clsx("h-14 px-7 text-[13px]", state.kind === "loading" && "animate-pulse")}>
+            <Button type="submit" disabled={state.kind === "loading"} className={clsx("h-12 px-7 text-[15px]", state.kind === "loading" && "animate-pulse")}>
               {state.kind === "loading" ? "Registrazione…" : "Prendi il tuo numero"} <Arrow />
             </Button>
             <p className="text-[13px] text-grigio">Nessun pagamento ora. È una lista d&apos;attesa.</p>
