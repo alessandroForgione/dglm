@@ -1,28 +1,15 @@
 import type { Metadata } from "next";
-import { Big_Shoulders, Schibsted_Grotesk, JetBrains_Mono } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { site } from "@/content/site";
+import { Announcement } from "@/components/Announcement";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 
-const display = Big_Shoulders({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: "variable",
-  axes: ["opsz"],
-  display: "swap",
-  adjustFontFallback: false,
-});
-const sans = Schibsted_Grotesk({
+const sans = Inter({
   variable: "--font-sans",
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "700"],
-  display: "swap",
-});
-const mono = JetBrains_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  weight: ["400", "700"],
   display: "swap",
 });
 
@@ -43,20 +30,20 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="it" className={`${display.variable} ${sans.variable} ${mono.variable} h-full antialiased`}>
+    <html lang="it" className={`${sans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <a
           href="#main"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-acido focus:px-3 focus:py-2 focus:text-asfalto"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-calce focus:px-3 focus:py-2 focus:text-asfalto"
         >
           Vai al contenuto
         </a>
+        <Announcement />
         <Nav />
         <main id="main" className="flex-1">
           {children}
         </main>
         <Footer />
-        <div className="noise" aria-hidden />
       </body>
     </html>
   );

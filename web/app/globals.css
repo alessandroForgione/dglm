@@ -1,155 +1,75 @@
 @import "tailwindcss";
 
 @theme {
-  /* Nero vero, calce per il testo, due segnali: lime = aperto/live, ruggine = scarsità. */
+  /* Monocromo come Horizon: nero pieno, testo bianco, grigi solo per stati e bordi. */
   --color-asfalto: #000000;
-  --color-cemento: #141414;
-  --color-grafite: #1f1f1f;
-  --color-calce: #f2f0ea;
-  --color-fumo: #8a8880;
-  --color-acido: #c8ff00;
-  --color-ruggine: #ff4a1c;
-  --color-line: rgba(242, 240, 234, 0.14);
+  --color-cemento: #111111;
+  --color-grafite: #262626;
+  --color-calce: #ffffff;
+  --color-fumo: rgba(255, 255, 255, 0.6);
+  --color-acido: #ffffff;
+  --color-ruggine: #ff5c5c;
+  --color-badge: #eef1ea;
+  --color-line: rgba(255, 255, 255, 0.15);
 
-  /* Nessun raggio in tutto il sito. */
-  --radius-*: initial;
-
-  --font-display: var(--font-display), "Impact", "Arial Narrow", sans-serif;
+  --font-display: var(--font-sans), "Helvetica Neue", Arial, sans-serif;
   --font-sans: var(--font-sans), "Helvetica Neue", Arial, sans-serif;
-  --font-mono: var(--font-mono), ui-monospace, "SF Mono", Menlo, monospace;
+  --font-mono: var(--font-sans), "Helvetica Neue", Arial, sans-serif;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-snap: cubic-bezier(0.7, 0, 0.2, 1);
-
-  --animate-marquee: marquee 28s linear infinite;
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
-  }
 }
 
 @layer base {
   :root {
     color-scheme: dark;
-    --nav-h: 64px;
   }
   html {
     background: var(--color-asfalto);
     color: var(--color-calce);
-    scroll-behavior: smooth;
     -webkit-text-size-adjust: 100%;
   }
   body {
     font-family: var(--font-sans);
     font-size: 1rem;
-    line-height: 1.55;
-    font-feature-settings: "ss01", "cv01";
+    line-height: 1.5;
     background: var(--color-asfalto);
     color: var(--color-calce);
     overflow-x: clip;
   }
   ::selection {
-    background: var(--color-acido);
+    background: var(--color-calce);
     color: var(--color-asfalto);
   }
   :focus-visible {
-    outline: 2px solid var(--color-acido);
+    outline: 2px solid var(--color-calce);
     outline-offset: 3px;
   }
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after {
       animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
       transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
     }
   }
 }
 
-/* Titoli, nomi prodotto, wordmark: condensato pesante, maiuscolo, interlinea stretta. */
+/* Titoli: Inter bold, interlinea stretta. */
 @utility display {
-  font-family: var(--font-display);
-  font-weight: 900;
-  font-variation-settings: "opsz" 72;
-  text-transform: uppercase;
-  letter-spacing: -0.01em;
-  line-height: 0.86;
+  font-family: var(--font-sans);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
-/* Etichette mono: usare con parsimonia, solo dove aggiungono informazione. */
+/* Etichette piccole e attenuate. */
 @utility eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-size: 0.8125rem;
   color: var(--color-fumo);
 }
 
-/* Wordmark serigrafico fuori registro: due layer, il lime sfalsato in screen. */
-@property --mis-x { syntax: "<length>"; inherits: true; initial-value: 0px; }
-@property --mis-y { syntax: "<length>"; inherits: true; initial-value: 0px; }
-@property --mis-o { syntax: "<number>"; inherits: true; initial-value: 1; }
-
-@utility misprint {
-  position: relative;
-  display: inline-block;
-  color: var(--color-calce);
-  &::before {
-    content: attr(data-text);
-    position: absolute;
-    inset: 0;
-    color: var(--color-acido);
-    opacity: var(--mis-o);
-    mix-blend-mode: screen;
-    transform: translate(var(--mis-x), var(--mis-y));
-    pointer-events: none;
-    z-index: -1;
-  }
-}
-
-/*
- * Hero: il layer lime parte molto fuori registro ed entra in registro; resta un filo sfalsato.
- * Sopra la foto il layer deve stare nello stesso stacking context della foto per fare screen:
- * z-index 0 sul layer e il testo visibile in uno <span class="relative"> dipinto dopo.
- * Il fade è su --mis-o del layer, non su opacity dell'h1 (eviterebbe il "pop" a fine animazione).
- */
-@keyframes register {
-  from { --mis-x: 0.45em; --mis-y: -0.3em; --mis-o: 0; }
-  40% { --mis-o: 1; }
-  to { --mis-x: 0.035em; --mis-y: -0.03em; --mis-o: 1; }
-}
-.hero-mark {
-  --mis-x: 0.035em;
-  --mis-y: -0.03em;
-  animation: register 1.6s var(--ease-out-expo) 0.3s both;
-  transition: --mis-x 0.5s var(--ease-snap), --mis-y 0.5s var(--ease-snap);
-}
-.hero-mark::before {
-  z-index: 0;
-}
-.hero-mark:hover {
-  --mis-x: 0.08em;
-  --mis-y: -0.07em;
-}
-@media (prefers-reduced-motion: reduce) {
-  .hero-mark { animation: none; }
-}
-
-.noise {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 60;
-  opacity: 0.06;
-  mix-blend-mode: overlay;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.9 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-  background-size: 240px 240px;
-}
-
-/* Card prodotto: la foto "scatta" all'hover. */
+/* Card prodotto: zoom leggero della foto all'hover. */
 .card-media {
   transition: transform 0.6s var(--ease-out-expo);
 }
 .group:hover .card-media {
-  transform: scale(1.035);
+  transform: scale(1.03);
 }

@@ -154,4 +154,4 @@ export const products: Product[] = [
 export const getProduct = (slug: string) => products.find((p) => p.slug === slug);
 export const featuredProducts = () => products.filter((p) => p.featured);
 export const formatPrice = (n: number) =>
-  new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR", maximumFractionDigits: 0 }).format(n);
+  new Intl.NumberFormat("it-IT", { style: "currency", currency: "EUR", minimumFractionDigits: 2 }).format(n);

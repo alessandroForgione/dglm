@@ -4,24 +4,14 @@ import { products } from "@/content/products";
 import { CollectionGrid } from "@/components/CollectionGrid";
 
 export const metadata: Metadata = {
-  title: "Collezione",
+  title: "Catalogo",
   description: `${site.drop.name} — ${products.length} capi in pre-order. ${site.description}`,
 };
 
 export default function CollezionePage() {
   return (
-    <section className="mx-auto max-w-[1600px] px-5 md:px-8 pt-[calc(var(--nav-h)+40px)] pb-16">
-      <div className="grid gap-6 md:grid-cols-12 md:items-end mb-8">
-        <div className="md:col-span-8">
-          <p className="eyebrow mb-3">
-            {site.drop.name} — {site.drop.label}
-          </p>
-          <h1 className="display text-[clamp(3.5rem,12vw,12rem)]">Collezione</h1>
-        </div>
-        <p className="md:col-span-4 text-calce/75 max-w-sm md:justify-self-end">
-          {products.length} capi, tirature chiuse. Tutti i pezzi sono in pre-order fino al drop: chi è in lista accede per primo.
-        </p>
-      </div>
+    <section className="px-5 md:px-10 pt-6 md:pt-10 pb-16 md:pb-24">
+      <h1 className="display text-[32px] md:text-[40px] mb-6">Catalogo</h1>
       <CollectionGrid />
     </section>
   );

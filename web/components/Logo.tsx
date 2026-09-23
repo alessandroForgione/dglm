@@ -1,19 +1,13 @@
 import Link from "next/link";
 import clsx from "clsx";
 
-/** Wordmark DGLM: display type + layer lime fuori registro. */
-export function Logo({ className, size = "md" }: { className?: string; size?: "sm" | "md" }) {
+/** Wordmark DGLM: Inter nero corsivo, compatto come un marchio stampato. */
+export function Logo({ className }: { className?: string }) {
   return (
     <Link
       href="/"
       aria-label="DGLM — home"
-      className={clsx(
-        "display misprint leading-none tracking-tight select-none",
-        size === "sm" ? "text-[28px]" : "text-[36px]",
-        className,
-      )}
-      data-text="DGLM"
-      style={{ ["--mis-x" as string]: "0.045em", ["--mis-y" as string]: "-0.045em" }}
+      className={clsx("font-bold italic text-[26px] md:text-[30px] leading-none tracking-[-0.06em] select-none", className)}
     >
       DGLM
     </Link>

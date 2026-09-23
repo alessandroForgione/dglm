@@ -1,18 +1,10 @@
 import type { Metadata } from "next";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import clsx from "clsx";
 import { site } from "@/content/site";
-import { products, getProduct, formatPrice, type Product } from "@/content/products";
-import { ButtonLink, Arrow } from "@/components/Button";
-import { ProductCard } from "@/components/ProductCard";
-
-const statusLabel: Record<Product["status"], { text: string; cls: string }> = {
-  preorder: { text: "Pre-order", cls: "text-acido" },
-  available: { text: "Disponibile", cls: "text-calce" },
-  soldout: { text: "Sold out", cls: "text-ruggine" },
-};
+import { products, getProduct, formatPrice } from "@/content/products";
+import { ButtonLink } from "@/components/Button";
+import { ProductGrid } from "@/components/ProductCard";
 
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
@@ -33,86 +25,63 @@ export default async function ProductPage({ params }: PageProps<"/collezione/[sl
   const { slug } = await params;
   const p = getProduct(slug);
   if (!p) notFound();
-  const related = products.filter((x) => x.slug !== p.slug && x.tag === p.tag).slice(0, 3);
-  const st = statusLabel[p.status];
+  const sameTag = products.filter((x) => x.slug !== p.slug && x.tag === p.tag);
+  const related = [...sameTag, ...products.filter((x) => x.slug !== p.slug && x.tag !== p.tag)].slice(0, 4);
 
   return (
-    <article className="mx-auto max-w-[1600px] px-5 md:px-8 pt-[calc(var(--nav-h)+24px)] pb-16">
-      <nav className="eyebrow mb-6 flex items-center gap-2" aria-label="Percorso">
-        <Link href="/collezione" className="transition-colors hover:text-acido">Collezione</Link>
-        <span>/</span>
-        <span className="text-calce/70">{p.tag}</span>
-      </nav>
-
-      <div className="grid gap-8 lg:grid-cols-12">
-        {/* Gallery: scroll orizzontale su mobile, impilata su desktop */}
-        <div className="lg:col-span-7 min-w-0">
-          <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory -mx-5 px-5 lg:mx-0 lg:px-0 lg:flex-col lg:overflow-visible">
-            {p.images.map((img, i) => (
-              <div
-                key={img.src}
-                className="relative shrink-0 snap-start w-[82vw] sm:w-[60vw] lg:w-full aspect-[4/5] overflow-hidden bg-cemento"
-              >
-                <Image src={img.src} alt={img.alt} fill priority={i === 0} sizes="(min-width:1024px) 55vw, 82vw" className="object-cover" />
-              </div>
-            ))}
-          </div>
+    <article className="px-5 md:px-10 pt-4 md:pt-10 pb-16 md:pb-24">
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,1fr)] lg:gap-14">
+        {/* Galleria: scroll orizzontale su mobile, due colonne da desktop */}
+        <div className="flex gap-3 overflow-x-auto snap-x snap-mandatory -mx-5 px-5 md:mx-0 md:px-0 md:grid md:grid-cols-2 md:overflow-visible">
+          {p.images.map((img, i) => (
+            <div key={img.src} className="relative shrink-0 snap-start w-[85vw] md:w-auto aspect-[4/5] overflow-hidden bg-cemento">
+              <Image src={img.src} alt={img.alt} fill priority={i === 0} sizes="(min-width:1024px) 33vw, (min-width:768px) 50vw, 85vw" className="object-cover" />
+            </div>
+          ))}
         </div>
 
-        <div className="lg:col-span-5 lg:sticky lg:top-[calc(var(--nav-h)+24px)] lg:self-start">
-          <p className="eyebrow mb-3">{p.color}</p>
-          <h1 className="display text-[clamp(2.5rem,6vw,5rem)]">{p.name}</h1>
-          <div className="mt-4 flex items-baseline gap-4">
-            <p className="font-mono text-[24px] tabular-nums">{formatPrice(p.price)}</p>
-            <p className={clsx("eyebrow", st.cls)}>{st.text}</p>
+        <div className="lg:sticky lg:top-10 lg:self-start">
+          <h1 className="display text-[28px] md:text-[34px]">{p.name}</h1>
+          <p className="mt-4 text-[15px] tabular-nums">{formatPrice(p.price)}</p>
+
+          <hr className="my-8 border-calce" />
+
+          <p className="text-[14px] mb-3">Taglie</p>
+          <ul className="grid grid-cols-4 gap-2" aria-label="Taglie disponibili">
+            {p.sizes.map((s) => (
+              <li key={s} className="h-11 rounded-xl bg-calce text-asfalto text-[14px] inline-flex items-center justify-center">
+                {s}
+              </li>
+            ))}
+          </ul>
+
+          <div className="mt-6">
+            {p.status === "soldout" ? (
+              <ButtonLink href="/preorder" variant="ink" className="w-full h-13">Sold out — avvisami</ButtonLink>
+            ) : (
+              <ButtonLink href="/preorder" className="w-full h-13">Pre-ordina</ButtonLink>
+            )}
+            <p className="mt-3 text-[13px] text-fumo">
+              Il pre-order è una lista d&apos;attesa: nessun pagamento ora. Ti contattiamo all&apos;apertura del drop.
+            </p>
           </div>
 
-          <p className="mt-8 text-[17px] leading-relaxed text-calce/85">{p.description}</p>
-
-          <div className="mt-8">
-            <p className="eyebrow mb-3">Taglie</p>
-            <ul className="flex flex-wrap gap-2">
-              {p.sizes.map((s) => (
-                <li key={s} className="font-mono text-[13px] h-10 min-w-10 px-3 inline-flex items-center justify-center border border-line">
-                  {s}
-                </li>
+          <div className="mt-8 space-y-4 text-[14px] leading-relaxed text-calce/85">
+            <p>{p.description}</p>
+            <ul className="list-disc pl-5 space-y-1">
+              {p.details.map((d) => (
+                <li key={d}>{d}</li>
               ))}
             </ul>
+            <p className="text-fumo">Colore: {p.color}</p>
           </div>
-
-          {/* Scheda tecnica, come un'etichetta cucita */}
-          <dl className="mt-8 border border-line divide-y divide-line">
-            {p.details.map((d) => (
-              <div key={d} className="px-4 py-3 font-mono text-[13px] text-calce/85">
-                {d}
-              </div>
-            ))}
-          </dl>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            {p.status === "soldout" ? (
-              <ButtonLink href="/preorder" variant="ghost">Avvisami al prossimo drop</ButtonLink>
-            ) : (
-              <ButtonLink href="/preorder">
-                Pre-ordina <Arrow />
-              </ButtonLink>
-            )}
-            <ButtonLink href="/collezione" variant="ghost">Torna alla collezione</ButtonLink>
-          </div>
-          <p className="mt-4 text-[13px] text-fumo">
-            Il pre-order è una lista d&apos;attesa: nessun pagamento ora. Ti contattiamo noi all&apos;apertura del drop.
-          </p>
         </div>
       </div>
 
       {related.length > 0 && (
-        <section className="mt-16">
-          <p className="eyebrow mb-6">Altri {p.tag}</p>
-          <div className="grid grid-cols-2 lg:grid-cols-3 border-t border-l border-line">
-            {related.map((r) => (
-              <ProductCard key={r.slug} product={r} />
-            ))}
-          </div>
+        <section className="mt-20 md:mt-28">
+          <h2 className="display text-[22px] md:text-[24px] mb-6 md:mb-8">Ti potrebbe piacere</h2>
+          <ProductGrid products={related} />
         </section>
       )}
     </article>

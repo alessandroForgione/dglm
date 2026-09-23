@@ -9,6 +9,8 @@ export const site = {
     "DGLM è un brand streetwear indipendente. Drop limitati, tagli netti, zero compromessi. Pre-order aperto.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://dglm.it",
   locale: "it_IT",
+  /** Testo della barra nera in cima a ogni pagina. */
+  announcement: "Benvenuto nel DGLM Club",
 
   drop: {
     name: "DROP 01",
@@ -50,7 +52,6 @@ export const site = {
   },
 
   /** Marquee che scorre in home e nel footer */
-  marquee: ["DGLM", "DROP 01", "PRE-ORDER OPEN", "MADE IN ITALY", "LIMITED RUN"],
 } as const;
 
 export type Site = typeof site;

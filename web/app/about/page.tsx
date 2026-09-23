@@ -8,8 +8,8 @@ export const metadata: Metadata = { title: "About", description: site.about.head
 export default function AboutPage() {
   const a = site.about;
   return (
-    <section className="mx-auto max-w-[1600px] px-5 md:px-8 pt-[calc(var(--nav-h)+40px)] pb-16">
-      <h1 className="display text-[clamp(3rem,10vw,11rem)] max-w-[12ch]">{a.headline}</h1>
+    <section className="px-5 md:px-10 pt-6 md:pt-10 pb-16 md:pb-24">
+      <h1 className="display text-[clamp(2rem,5vw,4rem)] max-w-[12ch]">{a.headline}</h1>
 
       <div className="mt-12 grid gap-10 lg:grid-cols-12">
         <div className="lg:col-span-7 relative aspect-[16/10] overflow-hidden bg-cemento">
@@ -45,12 +45,12 @@ export default function AboutPage() {
       {/* Timeline: qui l'ordine conta davvero */}
       <div className="mt-16 grid gap-8 lg:grid-cols-12">
         <div className="lg:col-span-4">
-          <h2 className="display text-[clamp(2.5rem,5vw,4.5rem)]">Da zero al drop</h2>
+          <h2 className="display text-[clamp(2rem,5vw,4rem)]">Da zero al drop</h2>
         </div>
         <ol className="lg:col-span-8 divide-y divide-line border-y border-line">
           {a.timeline.map((t) => (
             <li key={t.when} className="grid grid-cols-[120px_1fr] gap-6 py-5">
-              <span className="font-mono text-[13px] text-acido tabular-nums">{t.when}</span>
+              <span className="text-[13px] text-acido tabular-nums">{t.when}</span>
               <span className="text-calce/85">{t.what}</span>
             </li>
           ))}
