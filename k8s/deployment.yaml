@@ -21,7 +21,7 @@ spec:
         fsGroup: 1001
       containers:
         - name: web
-          image: ghcr.io/alessandroforgione/dglm-web:sha-b8d667d
+          image: ghcr.io/alessandroforgione/dglm-web:sha-8d04162
           imagePullPolicy: Always
           ports:
             - name: http
